@@ -1,0 +1,7 @@
+.login-form {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 65%;
+}
