@@ -1,4 +1,3 @@
-import "./loginForm.css";
 import InputForm from "../input/InputForm";
 import { useState } from "react";
 
@@ -6,7 +5,7 @@ function LoginForm({ setStateForm }) {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     return (
-        <form className="login-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="login-form form" onSubmit={(e) => e.preventDefault()}>
             <InputForm
                 id="username"
                 label="Usuario"

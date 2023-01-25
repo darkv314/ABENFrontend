@@ -7,6 +7,7 @@ import ReferenceIcons from "../../../components/referenceIcons/ReferenceIcons";
 import { useState } from "react";
 import PasswordForm from "../../../components/forms/passwordForm/PasswordForm";
 import RegisterForm from "../../../components/forms/registerForm/RegisterForm";
+import NewPasswordForm from "../../../components/forms/newPasswordForm/NewPasswordForm";
 
 function Login() {
     const [stateForm, setStateForm] = useState(0);
@@ -34,8 +35,10 @@ function Login() {
                     <LoginForm setStateForm={setStateForm} />
                 ) : stateForm === 1 ? (
                     <PasswordForm setStateForm={setStateForm} />
-                ) : (
+                ) : stateForm === 2 ? (
                     <RegisterForm setStateForm={setStateForm} />
+                ) : (
+                    <NewPasswordForm />
                 )}
                 <ReferenceIcons />
             </section>
