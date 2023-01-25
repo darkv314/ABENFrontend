@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import "./inputForm.css";
 
-function InputForm({ id, label, type }) {
+function InputForm({ id, label, type, value, setValue }) {
     const [showPassword, setShowPassword] = useState(false);
     return (
         <div className="input-form" onSubmit={(e) => e.preventDefault()}>
@@ -10,7 +10,12 @@ function InputForm({ id, label, type }) {
 
             {type === "password" ? (
                 <div className="password">
-                    <input type={showPassword ? "text" : "password"} required />
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        required
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                    />
                     <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
@@ -19,7 +24,12 @@ function InputForm({ id, label, type }) {
                     </button>
                 </div>
             ) : (
-                <input type={type} required />
+                <input
+                    type={type}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    required
+                />
             )}
         </div>
     );

@@ -4,8 +4,13 @@ import logoPluri from "../../../assets/plurinacional.png";
 import LoginForm from "../../../components/forms/loginForm/LoginForm";
 import Services from "../../../components/services/Services";
 import ReferenceIcons from "../../../components/referenceIcons/ReferenceIcons";
+import { useState } from "react";
+import PasswordForm from "../../../components/forms/passwordForm/PasswordForm";
+import RegisterForm from "../../../components/forms/registerForm/RegisterForm";
 
 function Login() {
+    const [stateForm, setStateForm] = useState(0);
+
     return (
         <div className="login">
             <section className="ads-container">
@@ -25,7 +30,13 @@ function Login() {
             </section>
             <section className="form-container">
                 <h3>SERVICIOS NUCLEARES</h3>
-                <LoginForm />
+                {stateForm === 0 ? (
+                    <LoginForm setStateForm={setStateForm} />
+                ) : stateForm === 1 ? (
+                    <PasswordForm setStateForm={setStateForm} />
+                ) : (
+                    <RegisterForm setStateForm={setStateForm} />
+                )}
                 <ReferenceIcons />
             </section>
         </div>

@@ -1,0 +1,7 @@
+.register-form {
+    width: 100%;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8em;
+}
