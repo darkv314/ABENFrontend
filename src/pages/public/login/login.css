@@ -41,7 +41,28 @@
 
 .form-container {
     display: grid;
-    grid-template-rows: 30% 1fr 1fr;
+    grid-template-rows: 30% 1fr 10%;
     padding: 3rem;
     place-items: center;
+}
+
+.form-container h3 {
+    text-align: center;
+}
+
+.loginForm-button {
+    font-family: inherit;
+    padding: 0.5em;
+    border-radius: 0.3em;
+    border: none;
+}
+
+.loginForm-button:hover {
+    background-color: var(--green);
+}
+
+.services-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }

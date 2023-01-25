@@ -1,0 +1,9 @@
+.services-container {
+    display: grid;
+    /* justify-self: center; */
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+    gap: 1em;
+}

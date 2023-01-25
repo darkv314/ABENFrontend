@@ -2,6 +2,8 @@ import "./login.css";
 import logoAben from "../../../assets/aben.png";
 import logoPluri from "../../../assets/plurinacional.png";
 import LoginForm from "../../../components/forms/loginForm/LoginForm";
+import Services from "../../../components/services/Services";
+import ReferenceIcons from "../../../components/referenceIcons/ReferenceIcons";
 
 function Login() {
     return (
@@ -18,12 +20,13 @@ function Login() {
                 <section className="ads">Espacio Publicitario</section>
                 <section className="services-section">
                     <h3>Oferta de Servicios</h3>
-                    <section className="services-container"></section>
+                    <Services />
                 </section>
             </section>
             <section className="form-container">
                 <h3>SERVICIOS NUCLEARES</h3>
-                <LoginForm />l
+                <LoginForm />
+                <ReferenceIcons />
             </section>
         </div>
     );

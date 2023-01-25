@@ -13,6 +13,8 @@ body {
 #root {
     font-family: "Raleway", sans-serif;
     --primary: #1653a3;
+    --primary-brilliant: #105fc6;
+    --primary-dark: #103668;
     --red: #ff0000;
     --green: #4ce0b3;
 }

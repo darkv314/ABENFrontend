@@ -1,7 +1,17 @@
 .login-form {
+    width: 100%;
+    /* flex-grow: 1; */
     align-self: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    width: 65%;
+    gap: 1.8rem;
+}
+
+.login-form p {
+    text-align: center;
+}
+
+.login-form p:hover {
+    color: var(--primary-brilliant);
+    cursor: pointer;
 }

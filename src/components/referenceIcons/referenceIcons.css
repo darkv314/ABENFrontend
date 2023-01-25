@@ -1,0 +1,9 @@
+.reference-icons {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.reference-icons svg:hover {
+    color: var(--primary-brilliant);
+}
