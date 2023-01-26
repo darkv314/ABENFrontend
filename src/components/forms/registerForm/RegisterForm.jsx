@@ -1,69 +1,79 @@
-import { useEffect, useState } from "react";
 import InputForm from "../input/InputForm";
 import "react-phone-input-2/lib/style.css";
-import { CODE_CHECK, EMAIL_CHECK } from "../../../helpers/helpers";
+import {
+    CODE_CHECK,
+    EMAIL_CHECK,
+    errMsgRequired,
+    errMsgPhone,
+    errMsgEmail,
+} from "../../../helpers/helpers";
 import "../form.css";
 import PhoneInput from "react-phone-input-2";
+import { useForm } from "react-hook-form";
+import PhoneInputForm from "../input/PhoneInputForm";
 
 function RegisterForm({ setStateForm }) {
-    const [name, setName] = useState("");
-    const [validName, setValidName] = useState(false);
-    const [email, setEmail] = useState("");
-    const [validEmail, setValidEmail] = useState(false);
-    const [phone, setPhone] = useState("");
-    const [validPhone, setValidPhone] = useState(false);
-
-    useEffect(() => {
-        name.length >= 4 ? setValidName(true) : setValidName(false);
-    }, [name]);
-
-    useEffect(() => {
-        setValidEmail(email.toLowerCase().match(EMAIL_CHECK));
-    }, [email]);
-
-    useEffect(() => {
-        setValidPhone(
-            phone.toLowerCase().match(CODE_CHECK) && phone.length >= 8
-        );
-    }, [phone]);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        control,
+    } = useForm();
 
     return (
-        <form className="register-form form">
+        <form
+            className="register-form form"
+            onSubmit={handleSubmit((data) => {
+                console.log(data);
+            })}
+        >
             <InputForm
+                register={register}
+                errors={errors.name}
                 id="name"
                 label="Nombre completo"
                 type="text"
-                value={name}
-                setValue={setName}
+                validations={{
+                    required: errMsgRequired,
+                }}
             />
+
             <InputForm
+                register={register}
+                errors={errors.username}
+                id="username"
+                label="Nombre de usuario"
+                type="text"
+                validations={{
+                    required: errMsgRequired,
+                    minLength: {
+                        value: 4,
+                        message:
+                            "El nombre de usuario debe contener almenos 4 caracteres",
+                    },
+                }}
+            />
+
+            <InputForm
+                errors={errors.email}
+                register={register}
                 id="email"
                 label="Email"
                 type="text"
-                value={email}
-                setValue={setEmail}
+                validations={{
+                    required: errMsgRequired,
+                    pattern: {
+                        value: EMAIL_CHECK,
+                        message: errMsgEmail,
+                    },
+                }}
             />
 
-            <div className="input-form">
-                <label htmlFor="phone">Teléfono celular</label>
-                <PhoneInput
-                    country={"bo"}
-                    placeholder="+591 777 111 22"
-                    id="phone"
-                    inputStyle={{
-                        width: "100%",
-                        border: "none",
-                        fontFamily: "inherit",
-                    }}
-                    buttonStyle={{ border: "none" }}
-                    regions={["south-america"]}
-                    onChange={(phone) => setPhone(phone)}
-                />
-            </div>
+            <PhoneInputForm control={control} errors={errors.phone} />
             <button
-                disabled={
-                    !validEmail || !validName || !validPhone ? true : false
-                }
+                // disabled={
+                //     !validEmail || !validName || !validPhone ? true : false
+                // }
                 className="loginForm-button"
             >
                 Crear cuenta

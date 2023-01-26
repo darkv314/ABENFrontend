@@ -2,19 +2,18 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import "./inputForm.css";
 
-function InputForm({ id, label, type, value, setValue }) {
+function InputForm({ register, errors, id, label, type, validations }) {
     const [showPassword, setShowPassword] = useState(false);
     return (
         <div className="input-form" onSubmit={(e) => e.preventDefault()}>
+            <p className="error">{errors?.message}</p>
             <label htmlFor={id}>{label}</label>
 
             {type === "password" ? (
                 <div className="password">
                     <input
                         type={showPassword ? "text" : "password"}
-                        required
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
+                        {...register(id, validations)}
                     />
                     <button
                         type="button"
@@ -24,12 +23,7 @@ function InputForm({ id, label, type, value, setValue }) {
                     </button>
                 </div>
             ) : (
-                <input
-                    type={type}
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    required
-                />
+                <input type={type} {...register(id, validations)} />
             )}
         </div>
     );

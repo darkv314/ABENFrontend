@@ -1,27 +1,51 @@
 import InputForm from "../input/InputForm";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { errMsgRequired } from "../../../helpers/helpers";
 
 function LoginForm({ setStateForm }) {
-    const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
     return (
-        <form className="login-form form" onSubmit={(e) => e.preventDefault()}>
+        <form
+            className="login-form form"
+            onSubmit={handleSubmit((data) => {
+                console.log(data);
+            })}
+        >
             <InputForm
+                register={register}
+                errors={errors.username}
                 id="username"
                 label="Usuario"
                 type="text"
-                value={user}
-                setValue={setUser}
+                validations={{
+                    required: errMsgRequired,
+                }}
             />
             <InputForm
+                register={register}
+                errors={errors.password}
                 id="password"
                 label="Contraseña"
                 type="password"
-                value={password}
-                setValue={setPassword}
+                validations={{
+                    required: errMsgRequired,
+                }}
             />
-            <p onClick={() => setStateForm(1)}>¿Olvidaste tu contraseña?</p>
-            <button className="loginForm-button">Ingresar</button>
+            <p className="link" onClick={() => setStateForm(1)}>
+                ¿Olvidaste tu contraseña?
+            </p>
+            <button
+                disabled={errors.keys ? true : false}
+                className="loginForm-button"
+            >
+                Ingresar
+            </button>
             <button
                 type="button"
                 onClick={() => setStateForm(2)}

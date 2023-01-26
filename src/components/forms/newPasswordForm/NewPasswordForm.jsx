@@ -1,35 +1,98 @@
 import { useState } from "react";
 import InputForm from "../input/InputForm";
 import "../form.css";
+import { CODE_CHECK, errMsgRequired } from "../../../helpers/helpers";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 function NewPasswordForm() {
-    const [code, setCode] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    let password;
+    const formSchema = Yup.object().shape({
+        password: Yup.string()
+            .required(errMsgRequired)
+            .min(4, "La contraseña debe tener al menos 4 caracteres")
+            .max(20, "La contraseña no debe tener más de 20 caracteres"),
+        cpassword: Yup.string()
+            .required(errMsgRequired)
+            .min(4, "La contraseña debe tener al menos 4 caracteres")
+            .max(20, "La contraseña no debe tener más de 20 caracteres")
+            .oneOf([Yup.ref("password")], "Las contraseñas no coinciden"),
+        code: Yup.string()
+            .required(errMsgRequired)
+            .min(4, "El código consta de 4 caracteres")
+            .max(4, "El código consta de 4 caracteres"),
+        // .matches(CODE_CHECK, "El campo debe ser un numero"),
+    });
+    const {
+        register,
+        handleSubmit,
+        // reset,
+        // watch,
+        formState: { errors },
+    } = useForm({ mode: "onTouched", resolver: yupResolver(formSchema) });
+
+    // password = watch("password", "");
     return (
-        <form className="newPassword-form form">
+        <form
+            className="newPassword-form form"
+            onSubmit={handleSubmit((data) => {
+                console.log(data);
+            })}
+        >
             <InputForm
+                register={register}
+                errors={errors.code}
                 id="code"
                 label="Ingresar código"
-                type="text"
-                value={code}
-                setValue={setCode}
+                type="number"
+                validations={{
+                    required: errMsgRequired,
+                    minLength: {
+                        value: 4,
+                        message: "El código consta de 4 caracteres",
+                    },
+                    maxLength: {
+                        value: 4,
+                        message: "El código consta de 4 caracteres",
+                    },
+                }}
             />
             <InputForm
-                id="newPassword"
+                register={register}
+                errors={errors.password}
+                id="password"
                 label="Nueva Contraseña"
                 type="password"
-                value={newPassword}
-                setValue={setNewPassword}
+                validations={
+                    {
+                        // required: errMsgRequired,
+                        // minLength: {
+                        //     value: 4,
+                        //     message:
+                        //         "La contraseña debe tener al menos 4 caracteres",
+                        // },
+                        // maxLength: {
+                        //     value: 20,
+                        //     message:
+                        //         "La contraseña no debe tener más de 20 caracteres",
+                        // },
+                    }
+                }
             />
             <InputForm
-                id="confirm"
+                register={register}
+                errors={errors.cpassword}
+                id="cpassword"
                 label="Confirmar Contraseña"
                 type="password"
-                value={confirmPassword}
-                setValue={setConfirmPassword}
+                validations={
+                    {
+                        // required: errMsgRequired,
+                    }
+                }
             />
-            <p>Volver a enviar código de recuperación</p>
+            <p className="link">Volver a enviar código de recuperación</p>
             <button className="loginForm-button">Ingresar</button>
         </form>
     );
