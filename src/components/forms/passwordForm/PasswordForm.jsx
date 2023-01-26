@@ -1,38 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputForm from "../input/InputForm";
 import "../form.css";
+import PhoneInput from "react-phone-input-2";
+import { useForm } from "react-hook-form";
+import { EMAIL_CHECK } from "../../../helpers/helpers";
 
 function PasswordForm({ setStateForm }) {
-    const [email, setEmail] = useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+    console.log(errors);
+
     return (
-        <form className="password-form form">
-            <InputForm
-                id="contact"
-                label="Ingresa tu email o número de teléfono"
-                value={email}
-                setValue={setEmail}
+        <form
+            onSubmit={handleSubmit((data) => {
+                console.log(data);
+            })}
+        >
+            <input
+                {...register("name", {
+                    required: "This is required",
+                    minLength: 4,
+                })}
+                type="text"
+                placeholder="name"
             />
-            <button
-                onClick={() => setStateForm(3)}
-                type="button"
-                className="loginForm-button"
-            >
-                Enviar Código
-            </button>
-            <button
-                onClick={() => setStateForm(0)}
-                type="button"
-                className="loginForm-button"
-            >
-                Iniciar Sesión
-            </button>
-            <button
-                onClick={() => setStateForm(1)}
-                type="button"
-                className="loginForm-button"
-            >
-                Crear Cuenta
-            </button>
+            <input type="text" />
+            <input type="submit" />
         </form>
     );
 }
