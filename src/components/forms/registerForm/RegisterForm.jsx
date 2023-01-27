@@ -1,16 +1,14 @@
 import InputForm from "../input/InputForm";
 import "react-phone-input-2/lib/style.css";
 import {
-    CODE_CHECK,
     EMAIL_CHECK,
     errMsgRequired,
-    errMsgPhone,
     errMsgEmail,
 } from "../../../helpers/helpers";
 import "../form.css";
-import PhoneInput from "react-phone-input-2";
 import { useForm } from "react-hook-form";
 import PhoneInputForm from "../input/PhoneInputForm";
+import { motion } from "framer-motion";
 
 function RegisterForm({ setStateForm }) {
     const {
@@ -31,7 +29,7 @@ function RegisterForm({ setStateForm }) {
                 register={register}
                 errors={errors.name}
                 id="name"
-                label="Nombre completo"
+                label="Nombre de la empresa"
                 type="text"
                 validations={{
                     required: errMsgRequired,
@@ -69,22 +67,41 @@ function RegisterForm({ setStateForm }) {
                 }}
             />
 
+            <InputForm
+                errors={errors.nit}
+                register={register}
+                id="nit"
+                label="NIT/Razón Social"
+                type="number"
+                validations={{
+                    required: errMsgRequired,
+                    minLength: {
+                        value: 6,
+                        message: "El número debe tener al menos 6 dígitos",
+                    },
+                }}
+            />
+
             <PhoneInputForm control={control} errors={errors.phone} />
-            <button
+            <motion.button
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.975 }}
                 // disabled={
                 //     !validEmail || !validName || !validPhone ? true : false
                 // }
                 className="loginForm-button"
             >
                 Crear cuenta
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.975 }}
                 onClick={() => setStateForm(0)}
                 type="button"
                 className="loginForm-button"
             >
                 Iniciar Sesión
-            </button>
+            </motion.button>
         </form>
     );
 }

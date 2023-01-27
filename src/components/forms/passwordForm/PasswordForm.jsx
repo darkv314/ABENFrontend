@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import InputForm from "../input/InputForm";
 import "../form.css";
-import PhoneInput from "react-phone-input-2";
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import {
     EMAIL_CHECK,
@@ -41,40 +41,56 @@ function PasswordForm({ setStateForm }) {
                             },
                         }}
                     />
-                    <p className="link" onClick={() => setForm(!form)}>
+                    <motion.p
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.975 }}
+                        className="link"
+                        onClick={() => setForm(!form)}
+                    >
                         Enviar código al celular
-                    </p>
+                    </motion.p>
                 </>
             ) : (
                 <>
                     <PhoneInputForm control={control} errors={errors.phone} />
-                    <p className="link" onClick={() => setForm(!form)}>
+                    <motion.p
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.975 }}
+                        className="link"
+                        onClick={() => setForm(!form)}
+                    >
                         Enviar código al email
-                    </p>
+                    </motion.p>
                 </>
             )}
-            <button
+            <motion.button
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.975 }}
                 // onClick={() => }
                 // type="button"
                 className="loginForm-button"
             >
                 Enviar Código
-            </button>
+            </motion.button>
             <br />
-            <button
+            <motion.button
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.975 }}
                 onClick={() => setStateForm(0)}
                 type="button"
                 className="loginForm-button"
             >
                 Iniciar Sesión
-            </button>
-            <button
-                onClick={() => setStateForm(1)}
+            </motion.button>
+            <motion.button
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.975 }}
+                onClick={() => setStateForm(2)}
                 type="button"
                 className="loginForm-button"
             >
                 Crear Cuenta
-            </button>
+            </motion.button>
         </form>
     );
 }

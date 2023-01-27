@@ -5,6 +5,7 @@ import { CODE_CHECK, errMsgRequired } from "../../../helpers/helpers";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { motion } from "framer-motion";
 
 function NewPasswordForm() {
     let password;
@@ -92,8 +93,20 @@ function NewPasswordForm() {
                     }
                 }
             />
-            <p className="link">Volver a enviar código de recuperación</p>
-            <button className="loginForm-button">Ingresar</button>
+            <motion.p
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.975 }}
+                className="link"
+            >
+                Volver a enviar código de recuperación
+            </motion.p>
+            <motion.button
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.975 }}
+                className="loginForm-button"
+            >
+                Ingresar
+            </motion.button>
         </form>
     );
 }

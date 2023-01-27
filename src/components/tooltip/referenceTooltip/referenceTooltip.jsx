@@ -5,8 +5,8 @@ const ReferenceTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
-        backgroundColor: "#105fc6",
-        color: "white",
+        backgroundColor: "#4ce0b3",
+        color: "black",
         boxShadow: theme.shadows[1],
         fontSize: 11,
     },

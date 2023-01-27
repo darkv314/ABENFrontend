@@ -1,12 +1,32 @@
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import "./inputForm.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 function InputForm({ register, errors, id, label, type, validations }) {
     const [showPassword, setShowPassword] = useState(false);
+    const animation = {
+        hidden: { y: -10, opacity: 0 },
+        visible: { y: 0, opacity: 1 },
+        exit: { opacity: 0 },
+    };
+
     return (
         <div className="input-form" onSubmit={(e) => e.preventDefault()}>
-            <p className="error">{errors?.message}</p>
+            <AnimatePresence initial={false} mode={"wait"}>
+                {errors?.message && (
+                    <motion.p
+                        variants={animation}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="error"
+                    >
+                        {errors?.message}
+                    </motion.p>
+                )}
+            </AnimatePresence>
+
             <label htmlFor={id}>{label}</label>
 
             {type === "password" ? (

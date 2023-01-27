@@ -2,6 +2,7 @@ import InputForm from "../input/InputForm";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { errMsgRequired } from "../../../helpers/helpers";
+import { motion } from "framer-motion";
 
 function LoginForm({ setStateForm }) {
     const {
@@ -37,22 +38,31 @@ function LoginForm({ setStateForm }) {
                     required: errMsgRequired,
                 }}
             />
-            <p className="link" onClick={() => setStateForm(1)}>
+            <motion.p
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.975 }}
+                className="link"
+                onClick={() => setStateForm(1)}
+            >
                 ¿Olvidaste tu contraseña?
-            </p>
-            <button
-                disabled={errors.keys ? true : false}
+            </motion.p>
+            <motion.button
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.975 }}
+                // disabled={errors.keys ? true : false}
                 className="loginForm-button"
             >
                 Ingresar
-            </button>
-            <button
+            </motion.button>
+            <motion.button
                 type="button"
+                whileHover={{ scale: 1.025 }}
+                whileTap={{ scale: 0.975 }}
                 onClick={() => setStateForm(2)}
                 className="loginForm-button"
             >
                 Crear Cuenta
-            </button>
+            </motion.button>
         </form>
     );
 }

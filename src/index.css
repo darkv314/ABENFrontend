@@ -16,5 +16,7 @@ body {
     --primary-brilliant: #105fc6;
     --primary-dark: #103668;
     --red: #ff0000;
+    --red-light: #d04444;
     --green: #4ce0b3;
+    --green-light: #4ce0b3bb;
 }

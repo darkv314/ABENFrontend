@@ -2,6 +2,7 @@ import "./referenceIcons.css";
 import { FaMapMarkedAlt, FaFilePdf } from "react-icons/fa";
 import { IoHelpCircle } from "react-icons/io5";
 import ReferenceTooltip from "../tooltip/referenceTooltip/referenceTooltip";
+import { motion } from "framer-motion";
 
 function ReferenceIcons() {
     const style = {
@@ -11,19 +12,28 @@ function ReferenceIcons() {
     return (
         <div className="reference-icons">
             <ReferenceTooltip title="Ayuda">
-                <span>
+                <motion.span
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                >
                     <IoHelpCircle style={style} />
-                </span>
+                </motion.span>
             </ReferenceTooltip>
             <ReferenceTooltip title="Mapa">
-                <span>
+                <motion.span
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                >
                     <FaMapMarkedAlt style={style} />
-                </span>
+                </motion.span>
             </ReferenceTooltip>
             <ReferenceTooltip title="Normativa ABEN">
-                <span>
+                <motion.span
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                >
                     <FaFilePdf style={style} />
-                </span>
+                </motion.span>
             </ReferenceTooltip>
         </div>
     );

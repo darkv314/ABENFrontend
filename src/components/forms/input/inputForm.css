@@ -25,9 +25,9 @@
 }
 
 /* Firefox */
-.input-form input[type="number"] {
+/* .input-form input[type="number"] {
     -moz-appearance: textfield;
-}
+} */
 
 .password {
     display: flex;
@@ -49,6 +49,9 @@
     place-items: center;
     outline: none;
 }
+.password div {
+    background-color: wheat;
+}
 
 .password:focus-within {
     outline-style: solid;
@@ -57,6 +60,8 @@
 }
 
 .error {
-    color: var(--red);
+    color: var(--red-light);
     font-size: 0.75rem;
+    font-weight: 700;
+    /* text-shadow: 0px 0.4px rgb(200, 195, 195); */
 }
