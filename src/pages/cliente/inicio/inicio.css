@@ -1,0 +1,54 @@
+.inicio {
+    display: grid;
+    align-self: stretch;
+    height: 100%;
+    grid-template-rows: 3fr 3fr 3fr;
+    gap: 0.5rem;
+}
+
+.inicio-section {
+    padding: 1rem;
+}
+
+.services-inicio {
+    height: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.intro {
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    /* gap: 1rem; */
+    place-items: center;
+    background-color: var(--primary);
+    color: whitesmoke;
+}
+
+.intro-text {
+    padding: 1rem;
+}
+
+.intro-img {
+    display: flex;
+    align-self: stretch;
+}
+
+.intro-img img {
+    width: 100%;
+    /* padding: 5%; */
+}
+.hired-services {
+    background-color: var(--green);
+    color: whitesmoke;
+}
+
+@media (max-width: 700px) {
+    .intro {
+        display: flex;
+    }
+    .intro img {
+        display: none;
+    }
+}

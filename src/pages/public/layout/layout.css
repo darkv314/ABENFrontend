@@ -1,0 +1,18 @@
+.App {
+    min-height: 100vh;
+    display: grid;
+    /* flex-direction: column; */
+}
+
+.layout {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.content {
+    display: grid;
+    /* background-color: whitesmoke; */
+    /* padding: 1rem; */
+    /* min-height: 100vh; */
+    align-self: stretch;
+}

@@ -8,10 +8,11 @@ import { useState } from "react";
 import PasswordForm from "../../../components/forms/passwordForm/PasswordForm";
 import RegisterForm from "../../../components/forms/registerForm/RegisterForm";
 import NewPasswordForm from "../../../components/forms/newPasswordForm/NewPasswordForm";
+import { useNavigate } from "react-router";
 
 function Login() {
     const [stateForm, setStateForm] = useState(0);
-
+    const navigate = useNavigate();
     return (
         <div className="login">
             <section className="ads-container">
@@ -32,7 +33,10 @@ function Login() {
             <section className="form-container">
                 <h3>SERVICIOS NUCLEARES</h3>
                 {stateForm === 0 ? (
-                    <LoginForm setStateForm={setStateForm} />
+                    <LoginForm
+                        navigate={navigate}
+                        setStateForm={setStateForm}
+                    />
                 ) : stateForm === 1 ? (
                     <PasswordForm setStateForm={setStateForm} />
                 ) : stateForm === 2 ? (

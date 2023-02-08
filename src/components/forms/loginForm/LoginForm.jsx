@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { errMsgRequired } from "../../../helpers/helpers";
 import { motion } from "framer-motion";
 
-function LoginForm({ setStateForm }) {
+function LoginForm({ navigate, setStateForm }) {
     const {
         register,
         handleSubmit,
@@ -16,6 +16,7 @@ function LoginForm({ setStateForm }) {
             className="login-form form"
             onSubmit={handleSubmit((data) => {
                 console.log(data);
+                navigate("/inicio");
             })}
         >
             <InputForm
@@ -49,7 +50,7 @@ function LoginForm({ setStateForm }) {
             <motion.button
                 whileHover={{ scale: 1.025 }}
                 whileTap={{ scale: 0.975 }}
-                // disabled={errors.keys ? true : false}
+                // onClick={() => navigate("/inicio")}
                 className="loginForm-button"
             >
                 Ingresar

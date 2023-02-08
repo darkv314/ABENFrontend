@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap");
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,6 +13,7 @@ body {
 }
 
 #root {
+    min-height: 100vh;
     font-family: "Raleway", sans-serif;
     --primary: #1653a3;
     --primary-brilliant: #105fc6;
