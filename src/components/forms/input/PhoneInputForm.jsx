@@ -25,13 +25,21 @@ function PhoneInputForm({ control, errors }) {
                 }}
                 render={({ field: { onChange } }) => (
                     <PhoneInput
+                        containerStyle={
+                            errors?.message
+                                ? {
+                                      outline: "2px solid red",
+                                      borderRadius: "0.2rem",
+                                  }
+                                : null
+                        }
                         country={"bo"}
                         placeholder="+591 777 111 22"
                         id="phone"
                         inputStyle={{
                             width: "100%",
                             border: "none",
-                            fontFamily: "inherit",
+                            fontFamily: `"Raleway", sans-serif`,
                         }}
                         buttonStyle={{ border: "none" }}
                         regions={["south-america"]}

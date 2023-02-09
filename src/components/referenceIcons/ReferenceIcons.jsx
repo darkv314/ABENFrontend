@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 
 function ReferenceIcons() {
     const style = {
-        width: "35px",
-        height: "35px",
+        width: "25px",
+        height: "25px",
     };
     return (
         <div className="reference-icons">

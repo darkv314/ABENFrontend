@@ -4,6 +4,7 @@
     justify-content: space-evenly;
     align-items: center;
     text-align: center;
+    padding: 1rem 0 0.5rem 0;
 }
 
 .reference-icons span {
