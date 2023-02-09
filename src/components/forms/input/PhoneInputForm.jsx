@@ -6,11 +6,12 @@ import {
     errMsgPhone,
     CODE_CHECK,
 } from "../../../helpers/helpers";
+import ErrMsg from "../errMsg/ErrMsg";
 
 function PhoneInputForm({ control, errors }) {
     return (
         <div className="input-form">
-            <p className="error">{errors?.message}</p>
+            {/* <p className="error">{errors?.message}</p> */}
             <label htmlFor="phone">Teléfono celular</label>
             <Controller
                 name="phone"
@@ -38,6 +39,7 @@ function PhoneInputForm({ control, errors }) {
                     />
                 )}
             ></Controller>
+            <ErrMsg errors={errors} />
         </div>
     );
 }

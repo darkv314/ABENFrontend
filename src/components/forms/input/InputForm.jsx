@@ -1,36 +1,22 @@
+import ErrMsg from "../errMsg/ErrMsg";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import "./inputForm.css";
-import { motion, AnimatePresence } from "framer-motion";
 
 function InputForm({ register, errors, id, label, type, validations }) {
     const [showPassword, setShowPassword] = useState(false);
-    const animation = {
-        hidden: { y: -10, opacity: 0 },
-        visible: { y: 0, opacity: 1 },
-        exit: { opacity: 0 },
-    };
 
     return (
         <div className="input-form" onSubmit={(e) => e.preventDefault()}>
-            <AnimatePresence initial={false} mode={"wait"}>
-                {errors?.message && (
-                    <motion.p
-                        variants={animation}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                        className="error"
-                    >
-                        {errors?.message}
-                    </motion.p>
-                )}
-            </AnimatePresence>
-
             <label htmlFor={id}>{label}</label>
 
             {type === "password" ? (
-                <div className="password">
+                <div
+                    className="password"
+                    style={
+                        errors?.message ? { outline: "2px solid red" } : null
+                    }
+                >
                     <input
                         type={showPassword ? "text" : "password"}
                         {...register(id, validations)}
@@ -43,8 +29,15 @@ function InputForm({ register, errors, id, label, type, validations }) {
                     </button>
                 </div>
             ) : (
-                <input type={type} {...register(id, validations)} />
+                <input
+                    style={
+                        errors?.message ? { outline: "2px solid red" } : null
+                    }
+                    type={type}
+                    {...register(id, validations)}
+                />
             )}
+            <ErrMsg errors={errors} />
         </div>
     );
 }

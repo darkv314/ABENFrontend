@@ -10,6 +10,8 @@
     border-radius: 0.2rem;
     padding: 0.75em;
     border: none;
+    /* outline:  */
+    /* outline-color: red; */
 }
 
 .input-form input:focus {
