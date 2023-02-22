@@ -1,8 +1,15 @@
 import InputForm from "../input/InputForm";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { errMsgRequired } from "../../../helpers/helpers";
+import {
+    errMsgRequired,
+    errMsgEmail,
+    EMAIL_CHECK,
+} from "../../../helpers/helpers";
 import { motion } from "framer-motion";
+import { gql, useMutation } from "@apollo/client";
+import ErrMsg from "../errMsg/ErrMsg";
+import useAuth from "../../../hooks/useAuth";
 
 function LoginForm({ navigate, setStateForm }) {
     const {
@@ -11,22 +18,50 @@ function LoginForm({ navigate, setStateForm }) {
         formState: { errors },
     } = useForm();
 
+    const { setAuth } = useAuth();
+
+    const LOGIN = gql`
+        mutation login($input: UsuarioInputLogin!) {
+            login(inputLogin: $input) {
+                access_token
+                nombre
+                id
+                rol {
+                    id
+                    nombre
+                }
+            }
+        }
+    `;
+
+    const [login, { data, loading, error }] = useMutation(LOGIN, {
+        onCompleted: (data) => {
+            const { nombre, id, access_token, rol } = data.login;
+            setAuth({ nombre, id, access_token, rol });
+            navigate("/inicio");
+        },
+    });
+
+    const onSubmit = (data) => {
+        console.log(data);
+        login({ variables: { input: data } });
+    };
     return (
-        <form
-            className="login-form form"
-            onSubmit={handleSubmit((data) => {
-                console.log(data);
-                navigate("/inicio");
-            })}
-        >
+        <form className="login-form form" onSubmit={handleSubmit(onSubmit)}>
+            <p>{data?.data}</p>
+            <ErrMsg errors={error} />
             <InputForm
                 register={register}
-                errors={errors.username}
-                id="username"
-                label="Usuario"
+                errors={errors.email}
+                id="email"
+                label="Email"
                 type="text"
                 validations={{
                     required: errMsgRequired,
+                    pattern: {
+                        value: EMAIL_CHECK,
+                        message: errMsgEmail,
+                    },
                 }}
             />
             <InputForm

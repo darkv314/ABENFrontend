@@ -15,11 +15,12 @@ function App() {
                 {/*Public routes*/}
                 <Route path="login" element={<Login />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
-                <Route path="inicio" element={<Inicio />} />
+
                 {/* Protected Routes */}
-                {/* <Route element={<RequireAuth allowedRoles={roles} />}>
-                    <Route path="/" element={<Home />}></Route>
-                </Route> */}
+                <Route element={<RequireAuth allowedRoles={["cliente"]} />}>
+                    <Route path="inicio" element={<Inicio />} />
+                    <Route path="/" element={<Inicio />} />
+                </Route>
                 {/* Missing */}
                 <Route path="missing" element={<Missing />} />
             </Route>

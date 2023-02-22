@@ -37,22 +37,6 @@ function RegisterForm({ setStateForm }) {
             />
 
             <InputForm
-                register={register}
-                errors={errors.username}
-                id="username"
-                label="Nombre de usuario"
-                type="text"
-                validations={{
-                    required: errMsgRequired,
-                    minLength: {
-                        value: 4,
-                        message:
-                            "El nombre de usuario debe contener almenos 4 caracteres",
-                    },
-                }}
-            />
-
-            <InputForm
                 errors={errors.email}
                 register={register}
                 id="email"
@@ -78,6 +62,22 @@ function RegisterForm({ setStateForm }) {
                     minLength: {
                         value: 6,
                         message: "El número debe tener al menos 6 dígitos",
+                    },
+                }}
+            />
+
+            <InputForm
+                register={register}
+                errors={errors.password}
+                id="password"
+                label="Contraseña"
+                type="password"
+                validations={{
+                    required: errMsgRequired,
+                    minLength: {
+                        value: 4,
+                        message:
+                            "La contraseña debe constar de almenos 6 caracteres",
                     },
                 }}
             />
