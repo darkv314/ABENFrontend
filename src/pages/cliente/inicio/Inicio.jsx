@@ -2,8 +2,25 @@ import React from "react";
 import Services from "../../../components/services/Services";
 import "./inicio.css";
 import abenLab from "../../../assets/abenLab.png";
+import { gql, useQuery } from "@apollo/client";
+import useAuth from "../../../hooks/useAuth";
 
 function Inicio() {
+    const { auth } = useAuth();
+
+    const GET_SERVICES = gql`
+        query {
+            servicios(usuarioId: ${auth.id}){
+                inicio
+            }
+        }
+    `;
+
+    const { data, loading, error } = useQuery(GET_SERVICES, {
+        context: { headers: { authorization: `Bearer ${auth.access_token}` } },
+    });
+
+    // console.log(data);
     return (
         <div className="inicio">
             <div className="intro">
@@ -28,6 +45,9 @@ function Inicio() {
 
             <div className="hired-services inicio-section">
                 <h2>Servicios contratados</h2>
+                {data && data.servicios.length > 0
+                    ? data.servicios.map((servicio) => <p>{servicio.inicio}</p>)
+                    : null}
             </div>
         </div>
     );
