@@ -1,8 +1,11 @@
 import "./cardService.css";
+import { motion } from "framer-motion";
 
 function CardService({ title, img }) {
     return (
-        <div
+        <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.975 }}
             className="card-service"
             style={{
                 backgroundImage: `url(${img})`,
@@ -11,7 +14,7 @@ function CardService({ title, img }) {
             <div className="card-text">
                 <h4>{title}</h4>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

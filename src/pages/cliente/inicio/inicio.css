@@ -2,7 +2,7 @@
     display: grid;
     align-self: stretch;
     height: 100%;
-    grid-template-rows: 3fr 3fr 3fr;
+    grid-template-rows: 50% 50% 50%;
     gap: 0.5rem;
 }
 
@@ -37,6 +37,7 @@
 
 .intro-img img {
     width: 100%;
+    object-fit: cover;
     /* padding: 5%; */
 }
 .hired-services {
