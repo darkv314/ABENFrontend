@@ -22,11 +22,20 @@
     grid-template-columns: 6fr 4fr;
     /* gap: 1rem; */
     place-items: center;
-    background-color: var(--primary);
+    /* background-color: var(--primary); */
     color: whitesmoke;
 }
 
 .intro-text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(
+        20deg,
+        var(--primary-dark) 35%,
+        var(--primary) 100%
+    );
     padding: 1rem;
 }
 
@@ -40,10 +49,6 @@
     object-fit: cover;
     /* padding: 5%; */
 }
-.hired-services {
-    background-color: var(--green);
-    color: whitesmoke;
-}
 
 @media (max-width: 550px) {
     .intro {
@@ -52,7 +57,7 @@
     .intro img {
         display: none;
     }
-    .intro-text {
+    .inicio {
         text-align: center;
     }
 }

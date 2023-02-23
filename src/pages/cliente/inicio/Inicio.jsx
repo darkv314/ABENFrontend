@@ -4,6 +4,7 @@ import "./inicio.css";
 import abenLab from "../../../assets/abenLab.png";
 import { gql, useQuery } from "@apollo/client";
 import useAuth from "../../../hooks/useAuth";
+import HiredServices from "../../../components/hiredServices/HiredServices";
 
 function Inicio() {
     const { auth } = useAuth();
@@ -43,12 +44,7 @@ function Inicio() {
                 <Services />
             </div>
 
-            <div className="hired-services inicio-section">
-                <h2>Servicios contratados</h2>
-                {data && data.servicios.length > 0
-                    ? data.servicios.map((servicio) => <p>{servicio.inicio}</p>)
-                    : null}
-            </div>
+            <HiredServices data={data} />
         </div>
     );
 }

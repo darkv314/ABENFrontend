@@ -1,0 +1,8 @@
+.hired-services {
+    background: linear-gradient(
+        200deg,
+        var(--primary-dark) 35%,
+        var(--primary) 100%
+    );
+    color: whitesmoke;
+}
