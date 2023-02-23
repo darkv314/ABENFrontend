@@ -40,7 +40,10 @@ function Login() {
                 ) : stateForm === 1 ? (
                     <PasswordForm setStateForm={setStateForm} />
                 ) : stateForm === 2 ? (
-                    <RegisterForm setStateForm={setStateForm} />
+                    <RegisterForm
+                        navigate={navigate}
+                        setStateForm={setStateForm}
+                    />
                 ) : (
                     <NewPasswordForm />
                 )}

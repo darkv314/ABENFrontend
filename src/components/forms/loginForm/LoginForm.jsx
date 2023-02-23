@@ -1,5 +1,4 @@
 import InputForm from "../input/InputForm";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
     errMsgRequired,
@@ -10,6 +9,7 @@ import { motion } from "framer-motion";
 import { gql, useMutation } from "@apollo/client";
 import ErrMsg from "../errMsg/ErrMsg";
 import useAuth from "../../../hooks/useAuth";
+import LoadingMessage from "../loadingMessage/LoadingMessage";
 
 function LoginForm({ navigate, setStateForm }) {
     const {
@@ -48,7 +48,7 @@ function LoginForm({ navigate, setStateForm }) {
     };
     return (
         <form className="login-form form" onSubmit={handleSubmit(onSubmit)}>
-            <p>{data?.data}</p>
+            {/* <p>{data?.data}</p> */}
             <ErrMsg errors={error} />
             <InputForm
                 register={register}
@@ -88,7 +88,11 @@ function LoginForm({ navigate, setStateForm }) {
                 // onClick={() => navigate("/inicio")}
                 className="loginForm-button"
             >
-                Ingresar
+                <LoadingMessage
+                    message="Ingresar"
+                    isLoadingMessage="Ingresando"
+                    isLoading={loading}
+                />
             </motion.button>
             <motion.button
                 type="button"

@@ -9,8 +9,12 @@ import "../form.css";
 import { useForm } from "react-hook-form";
 import PhoneInputForm from "../input/PhoneInputForm";
 import { motion } from "framer-motion";
+import useAuth from "../../../hooks/useAuth";
+import { gql, useMutation } from "@apollo/client";
+import ErrMsg from "../errMsg/ErrMsg";
+import LoadingMessage from "../loadingMessage/LoadingMessage";
 
-function RegisterForm({ setStateForm }) {
+function RegisterForm({ navigate, setStateForm }) {
     const {
         register,
         handleSubmit,
@@ -18,13 +22,47 @@ function RegisterForm({ setStateForm }) {
         control,
     } = useForm();
 
+    const { setAuth } = useAuth();
+
+    const REGISTER = gql`
+        mutation signup($input: CrearClienteInput!) {
+            signup(cliente: $input) {
+                nombre
+                access_token
+                id
+                rol {
+                    nombre
+                }
+            }
+        }
+    `;
+
+    const [signup, { data, loading, error }] = useMutation(REGISTER, {
+        onCompleted: (data) => {
+            const { nombre, id, access_token, rol } = data.signup;
+            setAuth({ nombre, id, access_token, rol });
+            navigate("/inicio");
+        },
+    });
+
+    const onSubmit = (data) => {
+        console.log(data);
+        signup({
+            variables: {
+                input: {
+                    nombre: data.name,
+                    email: data.email,
+                    password: data.password,
+                    telefono: `+${data.phone}`,
+                    nit: data.nit,
+                },
+            },
+        });
+    };
+
     return (
-        <form
-            className="register-form form"
-            onSubmit={handleSubmit((data) => {
-                console.log(data);
-            })}
-        >
+        <form className="register-form form" onSubmit={handleSubmit(onSubmit)}>
+            <ErrMsg errors={error} />
             <InputForm
                 register={register}
                 errors={errors.name}
@@ -91,7 +129,11 @@ function RegisterForm({ setStateForm }) {
                 // }
                 className="loginForm-button"
             >
-                Crear cuenta
+                <LoadingMessage
+                    message="Crear cuenta"
+                    isLoadingMessage="Creando cuenta"
+                    isLoading={loading}
+                />
             </motion.button>
             <motion.button
                 whileHover={{ scale: 1.025 }}
