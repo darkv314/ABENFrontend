@@ -6,3 +6,14 @@
     height: 100%;
     gap: 1em;
 }
+
+.services-section {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.login-services {
+    padding: 0;
+}

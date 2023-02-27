@@ -1,4 +1,5 @@
 .hired-services {
+    padding: 1rem;
     background: linear-gradient(
         200deg,
         var(--primary-dark) 35%,

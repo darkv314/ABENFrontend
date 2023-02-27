@@ -1,63 +1,6 @@
 .inicio {
     display: grid;
     align-self: stretch;
-    height: 100%;
     grid-template-rows: 50% 50% 50%;
     gap: 0.5rem;
-}
-
-.inicio-section {
-    padding: 1rem;
-}
-
-.services-inicio {
-    height: 100%;
-    display: flex;
-    gap: 1rem;
-    flex-direction: column;
-}
-
-.intro {
-    display: grid;
-    grid-template-columns: 6fr 4fr;
-    /* gap: 1rem; */
-    place-items: center;
-    /* background-color: var(--primary); */
-    color: whitesmoke;
-}
-
-.intro-text {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: linear-gradient(
-        20deg,
-        var(--primary-dark) 35%,
-        var(--primary) 100%
-    );
-    padding: 1rem;
-}
-
-.intro-img {
-    display: flex;
-    align-self: stretch;
-}
-
-.intro-img img {
-    width: 100%;
-    object-fit: cover;
-    /* padding: 5%; */
-}
-
-@media (max-width: 550px) {
-    .intro {
-        display: flex;
-    }
-    .intro img {
-        display: none;
-    }
-    .inicio {
-        text-align: center;
-    }
 }

@@ -25,10 +25,8 @@ function Login() {
                     </div>
                 </section>
                 <section className="ads">Espacio Publicitario</section>
-                <section className="services-section">
-                    <h3>Oferta de Servicios</h3>
-                    <Services />
-                </section>
+
+                <Services newClass="login-services" />
             </section>
             <section className="form-container">
                 <h3>SERVICIOS NUCLEARES</h3>
