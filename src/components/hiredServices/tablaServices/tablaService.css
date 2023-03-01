@@ -1,0 +1,36 @@
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+    max-height: 100%;
+}
+
+.tabla-service {
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 0.35rem;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.tabla-service table,
+.tabla-service th,
+.tabla-service td,
+.tabla-service tr {
+    border: 1px solid;
+    min-width: 10rem;
+}
+
+.tabla-service tr {
+    /* max-height: 50px; */
+    max-height: 40px;
+}
+
+.table-header {
+    position: sticky;
+}
+
+.table-header {
+    box-shadow: 3px 5px 10px rgb(110, 4, 4);
+    z-index: 1;
+}

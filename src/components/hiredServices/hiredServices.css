@@ -6,4 +6,7 @@
         var(--primary) 100%
     );
     color: whitesmoke;
+    display: grid;
+    grid-template-rows: 10% auto;
+    gap: 1rem;
 }
