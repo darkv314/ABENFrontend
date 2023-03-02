@@ -46,7 +46,7 @@ function RegisterForm({ navigate, setStateForm }) {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
         signup({
             variables: {
                 input: {

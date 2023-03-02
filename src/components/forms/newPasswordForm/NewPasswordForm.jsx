@@ -38,7 +38,7 @@ function NewPasswordForm() {
         <form
             className="newPassword-form form"
             onSubmit={handleSubmit((data) => {
-                console.log(data);
+                // console.log(data);
             })}
         >
             <InputForm

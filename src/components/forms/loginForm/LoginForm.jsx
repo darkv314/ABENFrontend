@@ -43,7 +43,7 @@ function LoginForm({ navigate, setStateForm }) {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
+        // console.log(data);
         login({ variables: { input: data } });
     };
     return (

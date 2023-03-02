@@ -22,7 +22,7 @@ function PasswordForm({ setStateForm }) {
         <form
             className="password-form form"
             onSubmit={handleSubmit((data) => {
-                console.log(data);
+                // console.log(data);
                 setStateForm(3);
             })}
         >
