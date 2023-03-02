@@ -43,6 +43,12 @@
     padding: 0 1rem;
     max-height: 80%;
     overflow-y: auto;
+    justify-self: start;
+}
+.descripcion-list ul {
+    flex-direction: column;
+    display: flex;
+    gap: 1rem;
 }
 
 .intro-img {
@@ -66,12 +72,6 @@
     .intro-text p,
     .descripcion-list ul li {
         font-size: 0.95rem;
-    }
-}
-
-@media (max-width: 1050px) {
-    .intro-text {
-        gap: 1rem;
     }
 }
 

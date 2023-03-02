@@ -1,6 +1,7 @@
 .inicio {
     display: grid;
     align-self: stretch;
-    grid-template-rows: 50% 50% 50%;
+    grid-template-rows: 60% 60% 60%;
     gap: 0.5rem;
+    max-height: 90svh;
 }

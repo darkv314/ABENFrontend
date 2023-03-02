@@ -10,3 +10,9 @@
     grid-template-rows: 10% auto;
     gap: 1rem;
 }
+
+@media (max-width: 280px) {
+    .hired-services {
+        grid-template-rows: 20% auto;
+    }
+}

@@ -12,7 +12,17 @@ function Inicio() {
     const GET_SERVICES = gql`
         query {
             servicios(usuarioId: ${auth.id}){
-                inicio
+                nombre,
+                estado{
+                    nombre
+                },
+                cantidad,
+                envio,
+                recojo,
+                fin,
+                documentos{
+                    nombre,
+                }
             }
         }
     `;
