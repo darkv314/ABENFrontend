@@ -36,7 +36,7 @@
 
 /* Handle on hover */
 .descripcion-list::-webkit-scrollbar-thumb:hover {
-    background: rgb(37, 46, 145);
+    background: rgba(16, 23, 94, 0.523);
 }
 
 .descripcion-list {
@@ -98,5 +98,11 @@
     .intro-text p,
     .descripcion-list ul li {
         font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 310px) {
+    .intro-text p {
+        padding: 1rem 0;
     }
 }
