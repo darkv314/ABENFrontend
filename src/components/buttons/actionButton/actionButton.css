@@ -1,0 +1,17 @@
+.loginForm-button {
+    font-family: inherit;
+    padding: 0.75em;
+    border-radius: 0.3em;
+    border: none;
+    background-color: var(--green-light);
+    font-weight: 550;
+}
+
+.loginForm-button:hover {
+    background-color: var(--green);
+    color: rgb(255, 255, 255);
+}
+
+.loginForm-button:disabled {
+    background-color: #e0e0e0;
+}

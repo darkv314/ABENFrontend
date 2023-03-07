@@ -13,8 +13,11 @@ import useAuth from "../../../hooks/useAuth";
 import { gql, useMutation } from "@apollo/client";
 import ErrMsg from "../errMsg/ErrMsg";
 import LoadingMessage from "../loadingMessage/LoadingMessage";
+import ActionButton from "../../buttons/actionButton/ActionButton";
+import { useNavigate } from "react-router";
 
-function RegisterForm({ navigate, setStateForm }) {
+function RegisterForm() {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -121,29 +124,16 @@ function RegisterForm({ navigate, setStateForm }) {
             />
 
             <PhoneInputForm control={control} errors={errors.phone} />
-            <motion.button
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.975 }}
-                // disabled={
-                //     !validEmail || !validName || !validPhone ? true : false
-                // }
-                className="loginForm-button"
-            >
+            <ActionButton>
                 <LoadingMessage
                     message="Crear cuenta"
                     isLoadingMessage="Creando cuenta"
                     isLoading={loading}
                 />
-            </motion.button>
-            <motion.button
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.975 }}
-                onClick={() => setStateForm(0)}
-                type="button"
-                className="loginForm-button"
-            >
+            </ActionButton>
+            <ActionButton type="button" handleClick={() => navigate("/login")}>
                 Iniciar Sesión
-            </motion.button>
+            </ActionButton>
         </form>
     );
 }

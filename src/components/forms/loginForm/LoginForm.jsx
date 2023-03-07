@@ -10,8 +10,11 @@ import { gql, useMutation } from "@apollo/client";
 import ErrMsg from "../errMsg/ErrMsg";
 import useAuth from "../../../hooks/useAuth";
 import LoadingMessage from "../loadingMessage/LoadingMessage";
+import ActionButton from "../../buttons/actionButton/ActionButton";
+import { useNavigate } from "react-router";
 
-function LoginForm({ navigate, setStateForm }) {
+function LoginForm() {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -78,31 +81,23 @@ function LoginForm({ navigate, setStateForm }) {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.975 }}
                 className="link"
-                onClick={() => setStateForm(1)}
+                onClick={() => navigate("/codigo")}
             >
                 ¿Olvidaste tu contraseña?
             </motion.p>
-            <motion.button
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.975 }}
-                // onClick={() => navigate("/inicio")}
-                className="loginForm-button"
-            >
+            <ActionButton>
                 <LoadingMessage
                     message="Ingresar"
                     isLoadingMessage="Ingresando"
                     isLoading={loading}
                 />
-            </motion.button>
-            <motion.button
+            </ActionButton>
+            <ActionButton
+                handleClick={() => navigate("/registro")}
                 type="button"
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.975 }}
-                onClick={() => setStateForm(2)}
-                className="loginForm-button"
             >
                 Crear Cuenta
-            </motion.button>
+            </ActionButton>
         </form>
     );
 }

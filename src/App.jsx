@@ -5,25 +5,35 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./pages/public/layout/Layout";
 import RequireAuth from "./RequireAuth";
 import Inicio from "./pages/cliente/inicio/Inicio";
+import Servicios from "./pages/cliente/servicios/Servicios";
+import LoginForm from "./components/forms/loginForm/LoginForm";
+import RegisterForm from "./components/forms/registerForm/RegisterForm";
+import NewPasswordForm from "./components/forms/newPasswordForm/NewPasswordForm";
+import PasswordForm from "./components/forms/passwordForm/PasswordForm";
 // import Home from "./pages/Home/Home";
 const roles = ["admin", "user", "lab"];
 
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route element={<Layout />}>
                 {/*Public routes*/}
-                <Route path="login" element={<Login />} />
+                <Route path="/" element={<Login />}>
+                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/registro" element={<RegisterForm />} />
+                    <Route path="/codigo" element={<PasswordForm />} />
+                    <Route path="/password" element={<NewPasswordForm />} />
+                </Route>
                 <Route path="unauthorized" element={<Unauthorized />} />
-
+                <Route path="servicio/:id" element={<Servicios />} />
                 {/* Protected Routes */}
                 <Route element={<RequireAuth allowedRoles={["cliente"]} />}>
                     <Route path="inicio" element={<Inicio />} />
-                    <Route path="/" element={<Inicio />} />
+                    {/* <Route path="/" element={<Inicio />} /> */}
                 </Route>
                 {/* Missing */}
-                <Route path="missing" element={<Missing />} />
             </Route>
+            <Route path="*" element={<Missing />} />
         </Routes>
     );
 }

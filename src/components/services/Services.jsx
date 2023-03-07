@@ -17,6 +17,7 @@ function Services({ newClass }) {
                 {services.map((service, index) => (
                     <CardService
                         key={index}
+                        id={index}
                         title={service.nombre}
                         img={service.img}
                     />

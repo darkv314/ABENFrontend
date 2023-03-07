@@ -1,9 +1,17 @@
 import "./cardService.css";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
-function CardService({ title, img }) {
+function CardService({ title, img, id }) {
+    const navigate = useNavigate();
+
+    function handleClick() {
+        navigate(`/servicio/${id}`);
+    }
+
     return (
         <motion.div
+            onClick={handleClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.975 }}
             className="card-service"

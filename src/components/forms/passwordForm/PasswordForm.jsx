@@ -9,8 +9,11 @@ import {
     errMsgEmail,
 } from "../../../helpers/helpers";
 import PhoneInputForm from "../input/PhoneInputForm";
+import ActionButton from "../../buttons/actionButton/ActionButton";
+import { useNavigate } from "react-router";
 
-function PasswordForm({ setStateForm }) {
+function PasswordForm() {
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -18,14 +21,12 @@ function PasswordForm({ setStateForm }) {
         control,
     } = useForm();
     const [form, setForm] = useState(true);
+    const onSubmit = (data) => {
+        console.log(data);
+        navigate("/password");
+    };
     return (
-        <form
-            className="password-form form"
-            onSubmit={handleSubmit((data) => {
-                // console.log(data);
-                setStateForm(3);
-            })}
-        >
+        <form className="password-form form" onSubmit={handleSubmit(onSubmit)}>
             {form ? (
                 <>
                     <InputForm
@@ -63,34 +64,17 @@ function PasswordForm({ setStateForm }) {
                     </motion.p>
                 </>
             )}
-            <motion.button
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.975 }}
-                // onClick={() => }
-                // type="button"
-                className="loginForm-button"
-            >
-                Enviar Código
-            </motion.button>
+            <ActionButton type="submit">Enviar Código</ActionButton>
             <br />
-            <motion.button
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.975 }}
-                onClick={() => setStateForm(0)}
-                type="button"
-                className="loginForm-button"
-            >
+            <ActionButton type="button" handleClick={() => navigate("/login")}>
                 Iniciar Sesión
-            </motion.button>
-            <motion.button
-                whileHover={{ scale: 1.025 }}
-                whileTap={{ scale: 0.975 }}
-                onClick={() => setStateForm(2)}
+            </ActionButton>
+            <ActionButton
                 type="button"
-                className="loginForm-button"
+                handleClick={() => navigate("/registro")}
             >
                 Crear Cuenta
-            </motion.button>
+            </ActionButton>
         </form>
     );
 }

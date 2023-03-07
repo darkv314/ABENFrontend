@@ -3,8 +3,10 @@ import logoAben from "../../../assets/aben.png";
 import logoPluri from "../../../assets/plurinacional.png";
 import "./nav.css";
 import { FaShoppingCart } from "react-icons/fa";
+import useAuth from "../../../hooks/useAuth";
 
 function Nav() {
+    const { auth } = useAuth();
     const [count, setCount] = useState(0);
     return (
         <nav>
@@ -19,12 +21,16 @@ function Nav() {
                     />
                 </div>
             </div>
-            <div className="nav-links">
-                {/* Inicio */}
-                <FaShoppingCart />
-                <span className="cart-count">{count}</span>
-                {/* Inicio */}
-            </div>
+            {auth?.nombre ? (
+                <div className="nav-links">
+                    {/* Inicio */}
+                    <FaShoppingCart />
+                    <span className="cart-count">{count}</span>
+                    {/* Inicio */}
+                </div>
+            ) : (
+                <button className="loginForm-button">Registrate</button>
+            )}
         </nav>
     );
 }
