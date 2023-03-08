@@ -131,7 +131,7 @@ function RegisterForm() {
                     isLoading={loading}
                 />
             </ActionButton>
-            <ActionButton type="button" handleClick={() => navigate("/login")}>
+            <ActionButton type="button" handleClick={() => navigate("/")}>
                 Iniciar Sesión
             </ActionButton>
         </form>

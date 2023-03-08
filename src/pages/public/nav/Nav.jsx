@@ -4,10 +4,13 @@ import logoPluri from "../../../assets/plurinacional.png";
 import "./nav.css";
 import { FaShoppingCart } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
+import ActionButton from "../../../components/buttons/actionButton/ActionButton";
+import { useNavigate } from "react-router";
 
 function Nav() {
     const { auth } = useAuth();
     const [count, setCount] = useState(0);
+    const navigate = useNavigate();
     return (
         <nav>
             <div className="nav-icons">
@@ -24,12 +27,19 @@ function Nav() {
             {auth?.nombre ? (
                 <div className="nav-links">
                     {/* Inicio */}
-                    <FaShoppingCart />
-                    <span className="cart-count">{count}</span>
+                    <div className="cart">
+                        <FaShoppingCart />
+                        <span className="cart-count">{count}</span>
+                    </div>
                     {/* Inicio */}
                 </div>
             ) : (
-                <button className="loginForm-button">Registrate</button>
+                <ActionButton
+                    type="button"
+                    handleClick={() => navigate("/registro")}
+                >
+                    Regístrate
+                </ActionButton>
             )}
         </nav>
     );

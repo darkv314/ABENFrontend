@@ -3,10 +3,13 @@ import logoAben from "../../../assets/aben.png";
 import logoPluri from "../../../assets/plurinacional.png";
 import Services from "../../../components/services/Services";
 import ReferenceIcons from "../../../components/referenceIcons/ReferenceIcons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router";
+import useAuth from "../../../hooks/useAuth";
 
 function Login() {
+    const { setAuth } = useAuth();
+    useEffect(() => setAuth(null), []);
     return (
         <div className="login">
             <section className="ads-container">

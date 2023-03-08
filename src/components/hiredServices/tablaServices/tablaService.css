@@ -1,6 +1,8 @@
 .table-header {
     box-shadow: 0.5px 0.5px 5px black;
     z-index: 1;
+    text-align: center;
+    /* padding-left: 0.7%; */
 }
 
 .table-body {

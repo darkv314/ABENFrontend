@@ -66,7 +66,7 @@ function PasswordForm() {
             )}
             <ActionButton type="submit">Enviar Código</ActionButton>
             <br />
-            <ActionButton type="button" handleClick={() => navigate("/login")}>
+            <ActionButton type="button" handleClick={() => navigate("/")}>
                 Iniciar Sesión
             </ActionButton>
             <ActionButton

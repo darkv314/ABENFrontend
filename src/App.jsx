@@ -19,7 +19,7 @@ function App() {
             <Route element={<Layout />}>
                 {/*Public routes*/}
                 <Route path="/" element={<Login />}>
-                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/" element={<LoginForm />} />
                     <Route path="/registro" element={<RegisterForm />} />
                     <Route path="/codigo" element={<PasswordForm />} />
                     <Route path="/password" element={<NewPasswordForm />} />
