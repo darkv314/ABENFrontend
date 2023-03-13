@@ -1,16 +1,6 @@
 import "./tablaService.css";
 
 function TablaServices({ data }) {
-    const servicios = [
-        "Servicio contratado",
-        "Estado",
-        "Cantidad",
-        "Fecha de envio/recojo",
-        "Fecha de entrega",
-        "Fecha de finalización",
-        "Documentación",
-    ];
-
     function className(value) {
         if (value === "Finalizado") {
             return "estado finalizado";
@@ -20,52 +10,45 @@ function TablaServices({ data }) {
             return "estado en-proceso";
         }
     }
-    // console.log(data);
+
+    function generateRows(data) {
+        return data?.map((servicio, index) => {
+            return (
+                <tr key={index}>
+                    {Object.keys(servicio)
+                        .splice(1)
+                        .map((key, index) => {
+                            return (
+                                <td key={index}>
+                                    <p
+                                        className={
+                                            key === "estado"
+                                                ? className(servicio[key])
+                                                : key
+                                        }
+                                    >
+                                        {servicio[key]
+                                            ? servicio[key]
+                                            : key === "estado"
+                                            ? "Contrato generado"
+                                            : "-"}
+                                    </p>
+                                </td>
+                            );
+                        })}
+                </tr>
+            );
+        });
+    }
+
     return (
         <div className="table-container">
             <div className="table-header">
-                <table className="tabla-service">
-                    <thead>
-                        <tr className="table-row-head">
-                            {servicios.map((servicio, index) => {
-                                return <th key={index}>{servicio}</th>;
-                            })}
-                        </tr>
-                    </thead>
-                </table>
+                <Header />
             </div>
             <div className="table-body">
                 <table>
-                    <tbody>
-                        {data?.map((servicio, index) => {
-                            return (
-                                <tr key={index}>
-                                    {Object.keys(servicio)
-                                        .splice(1)
-                                        .map((key, index) => {
-                                            return (
-                                                <td key={index}>
-                                                    <p
-                                                        className={
-                                                            key === "estado"
-                                                                ? className(
-                                                                      servicio[
-                                                                          key
-                                                                      ]
-                                                                  )
-                                                                : key
-                                                        }
-                                                    >
-                                                        {servicio[key] ||
-                                                            "No aceptado"}
-                                                    </p>
-                                                </td>
-                                            );
-                                        })}
-                                </tr>
-                            );
-                        })}
-                    </tbody>
+                    <tbody>{generateRows(data)}</tbody>
                 </table>
             </div>
         </div>
@@ -73,3 +56,25 @@ function TablaServices({ data }) {
 }
 
 export default TablaServices;
+const servicios = [
+    "Servicio contratado",
+    "Estado",
+    "Cantidad",
+    "Fecha de envio/recojo",
+    "Fecha de entrega",
+    "Fecha de finalización",
+    "Documentación",
+];
+function Header() {
+    return (
+        <table className="tabla-service">
+            <thead>
+                <tr className="table-row-head">
+                    {servicios.map((servicio, index) => {
+                        return <th key={index}>{servicio}</th>;
+                    })}
+                </tr>
+            </thead>
+        </table>
+    );
+}

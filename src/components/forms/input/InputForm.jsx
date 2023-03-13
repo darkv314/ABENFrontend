@@ -3,9 +3,8 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import "./inputForm.css";
 
-function InputForm({ register, errors, id, label, type, validations }) {
+function InputForm({ register, errors, id, label, type, validations, value }) {
     const [showPassword, setShowPassword] = useState(false);
-
     return (
         <div className="input-form" onSubmit={(e) => e.preventDefault()}>
             <label htmlFor={id}>{label}</label>
@@ -34,6 +33,7 @@ function InputForm({ register, errors, id, label, type, validations }) {
                         errors?.message ? { outline: "2px solid red" } : null
                     }
                     type={type}
+                    value={value}
                     {...register(id, validations)}
                 />
             )}

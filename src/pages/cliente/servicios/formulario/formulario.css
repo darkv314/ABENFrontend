@@ -1,0 +1,46 @@
+.servicios-form {
+    padding: 0.75rem 4rem;
+    width: 100%;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+.personal form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.personal form input {
+    outline: 1px solid var(--primary);
+}
+
+.servicios-form::-webkit-scrollbar {
+    width: 10px;
+    /* margin: 1rem; */
+}
+
+.servicios-form::-webkit-scrollbar-track {
+    background-color: rgba(138, 138, 138, 0.447);
+    border-radius: 10px;
+}
+
+.servicios-form::-webkit-scrollbar-thumb {
+    background: rgb(149, 149, 149);
+    border-radius: 10px;
+}
+
+.servicios-form::-webkit-scrollbar-thumb:hover {
+    background: rgb(107, 107, 107);
+}
+
+.servicios-form::-webkit-scrollbar-corner {
+    background: rgb(107, 107, 107);
+    color: aqua;
+}
+
+@media (max-width: 650px) {
+    .servicios-form {
+        grid-row: 2;
+    }
+}

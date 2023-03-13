@@ -11,8 +11,8 @@
     grid-template-rows: auto 1fr;
     gap: 1rem;
     text-align: justify;
-    padding: 1rem 4rem;
-    max-height: 80%;
+    padding: 0.75rem 4rem;
+    max-height: 90%;
     overflow-y: auto;
 }
 
@@ -57,6 +57,30 @@
 }
 .servicios-img-text h1 {
     padding: 1rem;
+}
+
+.servicios-text::-webkit-scrollbar {
+    width: 10px;
+    /* margin: 1rem; */
+}
+
+.servicios-text::-webkit-scrollbar-track {
+    background-color: rgba(138, 138, 138, 0.447);
+    border-radius: 10px;
+}
+
+.servicios-text::-webkit-scrollbar-thumb {
+    background: rgb(149, 149, 149);
+    border-radius: 10px;
+}
+
+.servicios-text::-webkit-scrollbar-thumb:hover {
+    background: rgb(107, 107, 107);
+}
+
+.servicios-text::-webkit-scrollbar-corner {
+    background: rgb(107, 107, 107);
+    color: aqua;
 }
 
 @media (max-width: 800px) {

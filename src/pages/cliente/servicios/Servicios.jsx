@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Outlet, useNavigate, useParams, useLocation } from "react-router-dom";
 import "./servicios.css";
 import { servicios } from "./data";
 import ActionButton from "../../../components/buttons/actionButton/ActionButton";
@@ -8,29 +8,13 @@ import useAuth from "../../../hooks/useAuth";
 function Servicios() {
     const { id } = useParams();
     const { auth } = useAuth();
+    const [descripcion, setDescripcion] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     return (
         <div className="servicios">
-            <div className="servicios-text">
-                <h2 className="titulo">{servicios[id].nombre}</h2>
-                <div className="descripcion">
-                    {typeof servicios[id].descripcion === "object"
-                        ? servicios[id].descripcion.map((item, index) =>
-                              item !== "items" ? (
-                                  <p key={index}>{item}</p>
-                              ) : (
-                                  <ul key={index} className="lista-items">
-                                      {servicios[id].items.map((a, index) => (
-                                          <li className="item" key={index}>
-                                              {a}
-                                          </li>
-                                      ))}
-                                  </ul>
-                              )
-                          )
-                        : servicios[id].descripcion}
-                </div>
-            </div>
+            <Outlet />
             <div
                 className="servicios-img"
                 style={{ backgroundImage: `url(${servicios[id].img})` }}
@@ -40,14 +24,31 @@ function Servicios() {
                     <ActionButton
                         type="button"
                         handleClick={
-                            auth?.nombre
-                                ? () => console.log("Redireccionar")
-                                : () => navigate("/registro")
+                            !auth?.nombre
+                                ? () => navigate("/registro")
+                                : descripcion
+                                ? () => {
+                                      navigate(`formulario/${id}`, {
+                                          replace: true,
+                                          state: { from },
+                                      });
+
+                                      setDescripcion(false);
+                                  }
+                                : () => {
+                                      navigate("", {
+                                          replace: true,
+                                          state: { from },
+                                      });
+                                      setDescripcion(true);
+                                  }
                         }
                     >
-                        {auth?.nombre
+                        {!auth?.nombre
+                            ? "Registrate para solicitar"
+                            : descripcion
                             ? "Solicitar"
-                            : "Registrate para solicitar"}
+                            : "Descripción"}
                     </ActionButton>
                 </div>
             </div>
@@ -56,3 +57,29 @@ function Servicios() {
 }
 
 export default Servicios;
+
+export function ServiciosDes() {
+    const { id } = useParams();
+    return (
+        <div className="servicios-text">
+            <h2 className="titulo">{servicios[id].nombre}</h2>
+            <div className="descripcion">
+                {typeof servicios[id].descripcion === "object"
+                    ? servicios[id].descripcion.map((item, index) =>
+                          item !== "items" ? (
+                              <p key={index}>{item}</p>
+                          ) : (
+                              <ul key={index} className="lista-items">
+                                  {servicios[id].items.map((a, index) => (
+                                      <li className="item" key={index}>
+                                          {a}
+                                      </li>
+                                  ))}
+                              </ul>
+                          )
+                      )
+                    : servicios[id].descripcion}
+            </div>
+        </div>
+    );
+}

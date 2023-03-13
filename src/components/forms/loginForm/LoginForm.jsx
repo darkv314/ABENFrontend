@@ -29,6 +29,8 @@ function LoginForm() {
                 access_token
                 nombre
                 id
+                email
+                nit
                 rol {
                     id
                     nombre
@@ -39,8 +41,8 @@ function LoginForm() {
 
     const [login, { data, loading, error }] = useMutation(LOGIN, {
         onCompleted: (data) => {
-            const { nombre, id, access_token, rol } = data.login;
-            setAuth({ nombre, id, access_token, rol });
+            const { nombre, id, email, nit, access_token, rol } = data.login;
+            setAuth({ nombre, id, email, nit, access_token, rol });
             navigate("/inicio");
         },
     });
