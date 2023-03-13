@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import InputForm from "../input/InputForm";
-import "../form.css";
+import InputForm from "../../formComponents/input/InputForm";
+import "../../form.css";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import {
     EMAIL_CHECK,
     errMsgRequired,
     errMsgEmail,
-} from "../../../helpers/helpers";
-import PhoneInputForm from "../input/PhoneInputForm";
-import ActionButton from "../../buttons/actionButton/ActionButton";
+} from "../../../../helpers/helpers";
+import PhoneInput from "react-phone-input-2";
+import ActionButton from "../../../buttons/actionButton/ActionButton";
 import { useNavigate } from "react-router";
 
 function PasswordForm() {

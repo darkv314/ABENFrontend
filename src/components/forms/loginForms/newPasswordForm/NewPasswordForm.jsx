@@ -1,12 +1,12 @@
 import { useState } from "react";
-import InputForm from "../input/InputForm";
-import "../form.css";
-import { CODE_CHECK, errMsgRequired } from "../../../helpers/helpers";
+import InputForm from "../../formComponents/input/InputForm";
+import "../../form.css";
+import { CODE_CHECK, errMsgRequired } from "../../../../helpers/helpers";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { motion } from "framer-motion";
-import ActionButton from "../../buttons/actionButton/ActionButton";
+import ActionButton from "../../../buttons/actionButton/ActionButton";
 
 function NewPasswordForm() {
     let password;

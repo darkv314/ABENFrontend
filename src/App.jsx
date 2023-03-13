@@ -6,11 +6,11 @@ import Layout from "./pages/public/layout/Layout";
 import RequireAuth from "./RequireAuth";
 import Inicio from "./pages/cliente/inicio/Inicio";
 import Servicios, { ServiciosDes } from "./pages/cliente/servicios/Servicios";
-import LoginForm from "./components/forms/loginForm/LoginForm";
-import RegisterForm from "./components/forms/registerForm/RegisterForm";
-import NewPasswordForm from "./components/forms/newPasswordForm/NewPasswordForm";
-import PasswordForm from "./components/forms/passwordForm/PasswordForm";
-import Formulario from "./pages/cliente/servicios/formulario/Formulario";
+import LoginForm from "./components/forms/loginForms/loginForm/LoginForm";
+import RegisterForm from "./components/forms/loginForms/registerForm/RegisterForm";
+import NewPasswordForm from "./components/forms/loginForms/newPasswordForm/NewPasswordForm";
+import PasswordForm from "./components/forms/loginForms/passwordForm/PasswordForm";
+import ServiciosForm from "./components/forms/serviciosForms/ServiciosForm";
 // import Home from "./pages/Home/Home";
 const roles = ["admin", "user", "lab"];
 
@@ -29,7 +29,10 @@ function App() {
                 <Route path="servicio/:id" element={<Servicios />}>
                     <Route path="" element={<ServiciosDes />} />
                     <Route element={<RequireAuth allowedRoles={["cliente"]} />}>
-                        <Route path="formulario/:id" element={<Formulario />} />
+                        <Route
+                            path="formulario/:id"
+                            element={<ServiciosForm />}
+                        />
                     </Route>
                 </Route>
                 {/* Protected Routes */}

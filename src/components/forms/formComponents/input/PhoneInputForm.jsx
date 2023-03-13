@@ -5,7 +5,7 @@ import {
     errMsgRequired,
     errMsgPhone,
     CODE_CHECK,
-} from "../../../helpers/helpers";
+} from "../../../../helpers/helpers";
 import ErrMsg from "../errMsg/ErrMsg";
 
 function PhoneInputForm({ control, errors }) {

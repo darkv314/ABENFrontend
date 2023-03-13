@@ -1,16 +1,16 @@
-import InputForm from "../input/InputForm";
+import InputForm from "../../formComponents/input/InputForm";
 import { useForm } from "react-hook-form";
 import {
     errMsgRequired,
     errMsgEmail,
     EMAIL_CHECK,
-} from "../../../helpers/helpers";
+} from "../../../../helpers/helpers";
 import { motion } from "framer-motion";
 import { gql, useMutation } from "@apollo/client";
-import ErrMsg from "../errMsg/ErrMsg";
-import useAuth from "../../../hooks/useAuth";
-import LoadingMessage from "../loadingMessage/LoadingMessage";
-import ActionButton from "../../buttons/actionButton/ActionButton";
+import ErrMsg from "../../formComponents/errMsg/ErrMsg";
+import useAuth from "../../../../hooks/useAuth";
+import LoadingMessage from "../../formComponents/loadingMessage/LoadingMessage";
+import ActionButton from "../../../buttons/actionButton/ActionButton";
 import { useNavigate } from "react-router";
 
 function LoginForm() {

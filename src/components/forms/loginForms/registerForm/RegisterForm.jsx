@@ -1,19 +1,19 @@
-import InputForm from "../input/InputForm";
+import InputForm from "../../formComponents/input/InputForm";
 import "react-phone-input-2/lib/style.css";
 import {
     EMAIL_CHECK,
     errMsgRequired,
     errMsgEmail,
-} from "../../../helpers/helpers";
-import "../form.css";
+} from "../../../../helpers/helpers";
+import "../../form.css";
 import { useForm } from "react-hook-form";
-import PhoneInputForm from "../input/PhoneInputForm";
+import PhoneInputForm from "../../formComponents/input/PhoneInputForm";
 import { motion } from "framer-motion";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../../../hooks/useAuth";
 import { gql, useMutation } from "@apollo/client";
-import ErrMsg from "../errMsg/ErrMsg";
-import LoadingMessage from "../loadingMessage/LoadingMessage";
-import ActionButton from "../../buttons/actionButton/ActionButton";
+import ErrMsg from "../../formComponents/errMsg/ErrMsg";
+import LoadingMessage from "../../formComponents/loadingMessage/LoadingMessage";
+import ActionButton from "../../../buttons/actionButton/ActionButton";
 import { useNavigate } from "react-router";
 
 function RegisterForm() {

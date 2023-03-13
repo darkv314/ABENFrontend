@@ -1,4 +1,4 @@
-import InputForm from "../input/InputForm";
+import InputForm from "../formComponents/input/InputForm";
 import { useForm } from "react-hook-form";
 import {
     errMsgRequired,
@@ -7,11 +7,11 @@ import {
 } from "../../../helpers/helpers";
 import { useParams } from "react-router";
 
-import "./formulario.css";
+import "./serviciosForm.css";
 import ActionButton from "../../buttons/actionButton/ActionButton";
 import useAuth from "../../../hooks/useAuth";
 
-function Formulario() {
+function ServiciosForm() {
     return (
         <div className="servicios-form">
             <div className="personal">
@@ -21,7 +21,7 @@ function Formulario() {
     );
 }
 
-export default Formulario;
+export default ServiciosForm;
 
 function InformacionPersonal() {
     const { auth } = useAuth();
