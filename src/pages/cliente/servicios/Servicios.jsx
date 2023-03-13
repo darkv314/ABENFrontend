@@ -58,7 +58,7 @@ function Servicios() {
 
 export default Servicios;
 
-export function ServiciosDes() {
+export function ServiciosDescripcion() {
     const { id } = useParams();
     return (
         <div className="servicios-text">

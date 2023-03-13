@@ -5,7 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./pages/public/layout/Layout";
 import RequireAuth from "./RequireAuth";
 import Inicio from "./pages/cliente/inicio/Inicio";
-import Servicios, { ServiciosDes } from "./pages/cliente/servicios/Servicios";
+import Servicios, {
+    ServiciosDescripcion,
+} from "./pages/cliente/servicios/Servicios";
 import LoginForm from "./components/forms/loginForms/loginForm/LoginForm";
 import RegisterForm from "./components/forms/loginForms/registerForm/RegisterForm";
 import NewPasswordForm from "./components/forms/loginForms/newPasswordForm/NewPasswordForm";
@@ -27,7 +29,7 @@ function App() {
                 </Route>
                 <Route path="unauthorized" element={<Unauthorized />} />
                 <Route path="servicio/:id" element={<Servicios />}>
-                    <Route path="" element={<ServiciosDes />} />
+                    <Route path="" element={<ServiciosDescripcion />} />
                     <Route element={<RequireAuth allowedRoles={["cliente"]} />}>
                         <Route
                             path="formulario/:id"
