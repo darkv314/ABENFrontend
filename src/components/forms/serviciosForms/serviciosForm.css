@@ -1,17 +1,17 @@
 .servicios-form {
-    padding: 0.75rem 4rem;
+    padding: 0.75rem 2.5rem;
     width: 100%;
     max-height: 90%;
     overflow-y: auto;
 }
 
-.personal form {
+.personal form > div {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.personal form input {
+.personal div input {
     outline: 1px solid var(--primary);
 }
 
@@ -37,6 +37,16 @@
 .servicios-form::-webkit-scrollbar-corner {
     background: rgb(107, 107, 107);
     color: aqua;
+}
+
+.servicios-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.servicios-button {
+    padding: 1rem;
 }
 
 @media (max-width: 650px) {

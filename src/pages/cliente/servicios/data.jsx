@@ -53,7 +53,7 @@ export const servicios = [
             {
                 label: "Nombre del equipo",
                 type: "text",
-                id: "nombre",
+                id: "nombre-equipo",
             },
             {
                 label: "Fabricante",
@@ -92,7 +92,7 @@ export const servicios = [
             {
                 label: "Nombre completo del trabajador",
                 type: "text",
-                id: "nombre",
+                id: "nombre-trabajador",
             },
             {
                 label: "Carnet de identidad",
