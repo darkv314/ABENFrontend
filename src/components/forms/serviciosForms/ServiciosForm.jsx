@@ -27,9 +27,7 @@ function ServiciosForm() {
         <div className="servicios-form">
             <div className="personal">
                 <form>
-                    {/* {item}
-                    <br />
-                    {itemList.length} */}
+                    {`${item + 1} de ${itemList.length + 1}`}
                     {item === 0 ? (
                         <InformacionPersonal
                             register={register}
