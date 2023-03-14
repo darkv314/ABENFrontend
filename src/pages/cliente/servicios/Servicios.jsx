@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams, useLocation } from "react-router-dom";
 import "./servicios.css";
 import { servicios } from "./data";
@@ -12,8 +12,18 @@ function Servicios() {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+    const nav = document.querySelector(".nav");
+    const navHeight = nav?.getBoundingClientRect().height;
+    useEffect(() => {
+        if (descripcion && location.pathname.includes("/formulario")) {
+            setDescripcion(false);
+        }
+    }, []);
     return (
-        <div className="servicios">
+        <div
+            className="servicios"
+            style={{ maxHeight: `calc(100vh - ${navHeight}px)` }}
+        >
             <Outlet />
             <div
                 className="servicios-img"

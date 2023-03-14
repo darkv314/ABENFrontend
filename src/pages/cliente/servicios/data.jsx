@@ -8,6 +8,33 @@ export const servicios = [
         descripcion:
             "El Laboratorio de Radiometría de la ABEN se dedica principalmente a la medición, la vigilancia y la evaluación radiológica en residuos de chatarra ferrosa, para la detección de una posible presencia de material radiactivo.",
         img: analisis,
+        preguntas: [
+            {
+                label: "Cantidad de material en miles de toneladas",
+                type: "number",
+                id: "cantidad",
+            },
+            {
+                label: "Tipo de material",
+                type: "text",
+                id: "tipo",
+            },
+            {
+                label: "Ubicación del material",
+                type: "text",
+                id: "ubicacion",
+            },
+            {
+                label: "Pais de origen",
+                type: "text",
+                id: "pais",
+            },
+            {
+                label: "Nombre de la empresa",
+                type: "text",
+                id: "empresa",
+            },
+        ],
     },
     {
         nombre: "Calibración",
@@ -22,6 +49,28 @@ export const servicios = [
             "Dosímetros de radiación portátiles de lectura directa.",
         ],
         img: calibracion,
+        preguntas: [
+            {
+                label: "Nombre del equipo",
+                type: "text",
+                id: "nombre",
+            },
+            {
+                label: "Fabricante",
+                type: "text",
+                id: "fabricante",
+            },
+            {
+                label: "Modelo",
+                type: "text",
+                id: "modelo",
+            },
+            {
+                label: "Número de serie",
+                type: "text",
+                id: "serie",
+            },
+        ],
     },
     {
         nombre: "Lectura de dosímetros",
@@ -39,5 +88,27 @@ export const servicios = [
             "Radiodiagnóstico convencional, tomografía fluoroscopía, mamografía y radiodiagnóstico dental",
         ],
         img: dosimetria,
+        preguntas: [
+            {
+                label: "Nombre completo del trabajador",
+                type: "text",
+                id: "nombre",
+            },
+            {
+                label: "Carnet de identidad",
+                type: "number",
+                id: "ci",
+            },
+            {
+                label: "CI expedido en",
+                type: "text",
+                id: "expedido",
+            },
+            {
+                label: "Cargo",
+                type: "text",
+                id: "cargo",
+            },
+        ],
     },
 ];

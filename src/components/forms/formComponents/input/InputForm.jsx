@@ -33,7 +33,7 @@ function InputForm({ register, errors, id, label, type, validations, value }) {
                         errors?.message ? { outline: "2px solid red" } : null
                     }
                     type={type}
-                    value={value}
+                    defaultValue={value}
                     {...register(id, validations)}
                 />
             )}

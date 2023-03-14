@@ -6,16 +6,19 @@ import { FaShoppingCart } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
 import ActionButton from "../../../components/buttons/actionButton/ActionButton";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function Nav() {
     const { auth } = useAuth();
     const [count, setCount] = useState(0);
     const navigate = useNavigate();
     return (
-        <nav>
+        <nav className="nav">
             <div className="nav-icons">
                 <div className="icon-container">
-                    <img src={logoAben} alt="Logo ABEN" />
+                    <Link to={"/inicio"}>
+                        <img src={logoAben} alt="Logo ABEN" />
+                    </Link>
                 </div>
                 <div className="icon-container">
                     <img
@@ -26,12 +29,10 @@ function Nav() {
             </div>
             {auth?.nombre ? (
                 <div className="nav-links">
-                    {/* Inicio */}
                     <div className="cart">
                         <FaShoppingCart />
                         <span className="cart-count">{count}</span>
                     </div>
-                    {/* Inicio */}
                 </div>
             ) : (
                 <ActionButton
