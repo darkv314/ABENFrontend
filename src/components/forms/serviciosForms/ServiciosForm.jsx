@@ -24,6 +24,7 @@ function ServiciosForm() {
     } = useForm();
     function onSubmit(data) {
         console.log(data);
+        setItem((item) => item + 1);
     }
     const [itemList, setItemList] = useState([]);
     const [item, setItem] = useState(0);
@@ -81,8 +82,6 @@ function ItemForm({ position, id, setItem }) {
                 {servicios[id]?.preguntas?.map((pregunta, index) => (
                     <InputForm
                         key={index}
-                        register={register}
-                        errors={errors[pregunta?.id]}
                         label={pregunta?.label}
                         id={`${pregunta?.id}-${position}`}
                         type={pregunta?.type}
@@ -104,7 +103,7 @@ function ItemForm({ position, id, setItem }) {
                     >
                         Atrás
                     </ActionButton>
-                    <ActionButton type="button" className="servicio-button">
+                    <ActionButton className="servicio-button">
                         Finalizar
                     </ActionButton>
                     <ActionButton
@@ -146,8 +145,6 @@ function InformacionPersonal({ setItem }) {
         >
             <h2>Información personal</h2>
             <InputForm
-                register={register}
-                errors={errors.nombre}
                 id="nombre"
                 label="Nombre de la institución"
                 type="text"
@@ -157,8 +154,6 @@ function InformacionPersonal({ setItem }) {
                 value={nombre}
             />
             <InputForm
-                register={register}
-                errors={errors.email}
                 id="email"
                 label="Email"
                 type="text"
@@ -172,8 +167,6 @@ function InformacionPersonal({ setItem }) {
                 value={email}
             />
             <InputForm
-                errors={errors.nit}
-                register={register}
                 id="nit"
                 label="NIT/Razón Social"
                 type="number"
@@ -187,8 +180,6 @@ function InformacionPersonal({ setItem }) {
                 value={nit}
             />
             <InputForm
-                register={register}
-                errors={errors.dir}
                 id="dir"
                 label="Dirección"
                 type="text"
@@ -199,8 +190,6 @@ function InformacionPersonal({ setItem }) {
 
             {id === "2" ? (
                 <InputForm
-                    register={register}
-                    errors={errors.riesgo}
                     id="riesgo"
                     label="Actividad asociada al riesgo de irradiación"
                     type="text"
@@ -209,17 +198,7 @@ function InformacionPersonal({ setItem }) {
                     }}
                 />
             ) : null}
-            {console.log(errors)}
-            <ActionButton
-                type="button"
-                handleClick={() => {
-                    trigger();
-                    Object.keys(errors).length === 0 &&
-                        setItem((item) => item + 1);
-                }}
-            >
-                Siguiente
-            </ActionButton>
+            <ActionButton>Siguiente</ActionButton>
         </motion.div>
     );
 }
