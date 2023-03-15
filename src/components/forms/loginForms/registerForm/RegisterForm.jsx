@@ -6,7 +6,7 @@ import {
     errMsgEmail,
 } from "../../../../helpers/helpers";
 import "../../form.css";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import PhoneInputForm from "../../formComponents/input/PhoneInputForm";
 import { motion } from "framer-motion";
 import useAuth from "../../../../hooks/useAuth";
@@ -64,77 +64,74 @@ function RegisterForm() {
     };
 
     return (
-        <form className="register-form form" onSubmit={handleSubmit(onSubmit)}>
-            <ErrMsg errors={error} />
-            <InputForm
-                register={register}
-                errors={errors.name}
-                id="name"
-                label="Nombre de la empresa"
-                type="text"
-                validations={{
-                    required: errMsgRequired,
-                }}
-            />
-
-            <InputForm
-                errors={errors.email}
-                register={register}
-                id="email"
-                label="Email"
-                type="text"
-                validations={{
-                    required: errMsgRequired,
-                    pattern: {
-                        value: EMAIL_CHECK,
-                        message: errMsgEmail,
-                    },
-                }}
-            />
-
-            <InputForm
-                errors={errors.nit}
-                register={register}
-                id="nit"
-                label="NIT/Razón Social"
-                type="number"
-                validations={{
-                    required: errMsgRequired,
-                    minLength: {
-                        value: 6,
-                        message: "El número debe tener al menos 6 dígitos",
-                    },
-                }}
-            />
-
-            <InputForm
-                register={register}
-                errors={errors.password}
-                id="password"
-                label="Contraseña"
-                type="password"
-                validations={{
-                    required: errMsgRequired,
-                    minLength: {
-                        value: 4,
-                        message:
-                            "La contraseña debe constar de almenos 6 caracteres",
-                    },
-                }}
-            />
-
-            <PhoneInputForm control={control} errors={errors.phone} />
-            <ActionButton>
-                <LoadingMessage
-                    message="Crear cuenta"
-                    isLoadingMessage="Creando cuenta"
-                    isLoading={loading}
+        <FormProvider {...{ register, errors, control }}>
+            <form
+                className="register-form form"
+                onSubmit={handleSubmit(onSubmit)}
+            >
+                <ErrMsg errors={error} />
+                <InputForm
+                    id="name"
+                    label="Nombre de la empresa"
+                    type="text"
+                    validations={{
+                        required: errMsgRequired,
+                    }}
                 />
-            </ActionButton>
-            <ActionButton type="button" handleClick={() => navigate("/")}>
-                Iniciar Sesión
-            </ActionButton>
-        </form>
+
+                <InputForm
+                    id="email"
+                    label="Email"
+                    type="text"
+                    validations={{
+                        required: errMsgRequired,
+                        pattern: {
+                            value: EMAIL_CHECK,
+                            message: errMsgEmail,
+                        },
+                    }}
+                />
+
+                <InputForm
+                    id="nit"
+                    label="NIT/Razón Social"
+                    type="number"
+                    validations={{
+                        required: errMsgRequired,
+                        minLength: {
+                            value: 6,
+                            message: "El número debe tener al menos 6 dígitos",
+                        },
+                    }}
+                />
+
+                <InputForm
+                    id="password"
+                    label="Contraseña"
+                    type="password"
+                    validations={{
+                        required: errMsgRequired,
+                        minLength: {
+                            value: 4,
+                            message:
+                                "La contraseña debe constar de almenos 6 caracteres",
+                        },
+                    }}
+                />
+
+                <PhoneInputForm />
+                <ActionButton>
+                    <LoadingMessage
+                        message="Crear cuenta"
+                        isLoadingMessage="Creando cuenta"
+                        isLoading={loading}
+                    />
+                </ActionButton>
+                <ActionButton type="button" handleClick={() => navigate("/")}>
+                    Iniciar Sesión
+                </ActionButton>
+            </form>
+        </FormProvider>
     );
 }
 

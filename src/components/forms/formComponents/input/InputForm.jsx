@@ -2,9 +2,11 @@ import ErrMsg from "../errMsg/ErrMsg";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import "./inputForm.css";
+import { useFormContext } from "react-hook-form";
 
-function InputForm({ register, errors, id, label, type, validations, value }) {
+function InputForm({ id, label, type, validations, value }) {
     const [showPassword, setShowPassword] = useState(false);
+    const { register, errors } = useFormContext();
     return (
         <div className="input-form" onSubmit={(e) => e.preventDefault()}>
             <label htmlFor={id}>{label}</label>
@@ -12,9 +14,7 @@ function InputForm({ register, errors, id, label, type, validations, value }) {
             {type === "password" ? (
                 <div
                     className="password"
-                    style={
-                        errors?.message ? { outline: "2px solid red" } : null
-                    }
+                    style={errors[id] ? { outline: "2px solid red" } : null}
                 >
                     <input
                         type={showPassword ? "text" : "password"}
@@ -29,15 +29,13 @@ function InputForm({ register, errors, id, label, type, validations, value }) {
                 </div>
             ) : (
                 <input
-                    style={
-                        errors?.message ? { outline: "2px solid red" } : null
-                    }
+                    style={errors[id] ? { outline: "2px solid red" } : null}
                     type={type}
                     defaultValue={value}
                     {...register(id, validations)}
                 />
             )}
-            <ErrMsg errors={errors} />
+            <ErrMsg errors={errors[id]} />
         </div>
     );
 }

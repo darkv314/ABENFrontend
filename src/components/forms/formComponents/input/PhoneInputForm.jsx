@@ -7,8 +7,10 @@ import {
     CODE_CHECK,
 } from "../../../../helpers/helpers";
 import ErrMsg from "../errMsg/ErrMsg";
+import { useFormContext } from "react-hook-form";
 
-function PhoneInputForm({ control, errors }) {
+function PhoneInputForm() {
+    const { control, errors } = useFormContext();
     return (
         <div className="input-form">
             {/* <p className="error">{errors?.message}</p> */}
@@ -26,7 +28,7 @@ function PhoneInputForm({ control, errors }) {
                 render={({ field: { onChange } }) => (
                     <PhoneInput
                         containerStyle={
-                            errors?.message
+                            errors["phone"]
                                 ? {
                                       outline: "2px solid red",
                                       borderRadius: "0.2rem",
@@ -47,7 +49,7 @@ function PhoneInputForm({ control, errors }) {
                     />
                 )}
             ></Controller>
-            <ErrMsg errors={errors} />
+            <ErrMsg errors={errors["phone"]} />
         </div>
     );
 }

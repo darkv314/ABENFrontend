@@ -1,5 +1,5 @@
 import InputForm from "../../formComponents/input/InputForm";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import {
     errMsgRequired,
     errMsgEmail,
@@ -52,55 +52,53 @@ function LoginForm() {
         login({ variables: { input: data } });
     };
     return (
-        <form className="login-form form" onSubmit={handleSubmit(onSubmit)}>
-            {/* <p>{data?.data}</p> */}
-            <ErrMsg errors={error} />
-            <InputForm
-                register={register}
-                errors={errors.email}
-                id="email"
-                label="Email"
-                type="text"
-                validations={{
-                    required: errMsgRequired,
-                    pattern: {
-                        value: EMAIL_CHECK,
-                        message: errMsgEmail,
-                    },
-                }}
-            />
-            <InputForm
-                register={register}
-                errors={errors.password}
-                id="password"
-                label="Contraseña"
-                type="password"
-                validations={{
-                    required: errMsgRequired,
-                }}
-            />
-            <motion.p
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.975 }}
-                className="link"
-                onClick={() => navigate("/codigo")}
-            >
-                ¿Olvidaste tu contraseña?
-            </motion.p>
-            <ActionButton>
-                <LoadingMessage
-                    message="Ingresar"
-                    isLoadingMessage="Ingresando"
-                    isLoading={loading}
+        <FormProvider {...{ register, errors }}>
+            <form className="login-form form" onSubmit={handleSubmit(onSubmit)}>
+                {/* <p>{data?.data}</p> */}
+                <ErrMsg errors={error} />
+                <InputForm
+                    id="email"
+                    label="Email"
+                    type="text"
+                    validations={{
+                        required: errMsgRequired,
+                        pattern: {
+                            value: EMAIL_CHECK,
+                            message: errMsgEmail,
+                        },
+                    }}
                 />
-            </ActionButton>
-            <ActionButton
-                handleClick={() => navigate("/registro")}
-                type="button"
-            >
-                Crear Cuenta
-            </ActionButton>
-        </form>
+                <InputForm
+                    id="password"
+                    label="Contraseña"
+                    type="password"
+                    validations={{
+                        required: errMsgRequired,
+                    }}
+                />
+                <motion.p
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.975 }}
+                    className="link"
+                    onClick={() => navigate("/codigo")}
+                >
+                    ¿Olvidaste tu contraseña?
+                </motion.p>
+                <ActionButton>
+                    <LoadingMessage
+                        message="Ingresar"
+                        isLoadingMessage="Ingresando"
+                        isLoading={loading}
+                    />
+                </ActionButton>
+                <ActionButton
+                    handleClick={() => navigate("/registro")}
+                    type="button"
+                >
+                    Crear Cuenta
+                </ActionButton>
+            </form>
+        </FormProvider>
     );
 }
 

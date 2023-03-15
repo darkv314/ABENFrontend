@@ -2,7 +2,7 @@ import { useState } from "react";
 import InputForm from "../../formComponents/input/InputForm";
 import "../../form.css";
 import { CODE_CHECK, errMsgRequired } from "../../../../helpers/helpers";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { motion } from "framer-motion";
@@ -36,73 +36,69 @@ function NewPasswordForm() {
 
     // password = watch("password", "");
     return (
-        <form
-            className="newPassword-form form"
-            onSubmit={handleSubmit((data) => {
-                // console.log(data);
-            })}
-        >
-            <InputForm
-                register={register}
-                errors={errors.code}
-                id="code"
-                label="Ingresar código"
-                type="number"
-                validations={{
-                    required: errMsgRequired,
-                    minLength: {
-                        value: 4,
-                        message: "El código consta de 4 caracteres",
-                    },
-                    maxLength: {
-                        value: 4,
-                        message: "El código consta de 4 caracteres",
-                    },
-                }}
-            />
-            <InputForm
-                register={register}
-                errors={errors.password}
-                id="password"
-                label="Nueva Contraseña"
-                type="password"
-                validations={
-                    {
-                        // required: errMsgRequired,
-                        // minLength: {
-                        //     value: 4,
-                        //     message:
-                        //         "La contraseña debe tener al menos 4 caracteres",
-                        // },
-                        // maxLength: {
-                        //     value: 20,
-                        //     message:
-                        //         "La contraseña no debe tener más de 20 caracteres",
-                        // },
-                    }
-                }
-            />
-            <InputForm
-                register={register}
-                errors={errors.cpassword}
-                id="cpassword"
-                label="Confirmar Contraseña"
-                type="password"
-                validations={
-                    {
-                        // required: errMsgRequired,
-                    }
-                }
-            />
-            <motion.p
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.975 }}
-                className="link"
+        <FormProvider {...{ register, errors }}>
+            <form
+                className="newPassword-form form"
+                onSubmit={handleSubmit((data) => {
+                    // console.log(data);
+                })}
             >
-                Volver a enviar código de recuperación
-            </motion.p>
-            <ActionButton>Ingresar</ActionButton>
-        </form>
+                <InputForm
+                    id="code"
+                    label="Ingresar código"
+                    type="number"
+                    validations={{
+                        required: errMsgRequired,
+                        minLength: {
+                            value: 4,
+                            message: "El código consta de 4 caracteres",
+                        },
+                        maxLength: {
+                            value: 4,
+                            message: "El código consta de 4 caracteres",
+                        },
+                    }}
+                />
+                <InputForm
+                    id="password"
+                    label="Nueva Contraseña"
+                    type="password"
+                    validations={
+                        {
+                            // required: errMsgRequired,
+                            // minLength: {
+                            //     value: 4,
+                            //     message:
+                            //         "La contraseña debe tener al menos 4 caracteres",
+                            // },
+                            // maxLength: {
+                            //     value: 20,
+                            //     message:
+                            //         "La contraseña no debe tener más de 20 caracteres",
+                            // },
+                        }
+                    }
+                />
+                <InputForm
+                    id="cpassword"
+                    label="Confirmar Contraseña"
+                    type="password"
+                    validations={
+                        {
+                            // required: errMsgRequired,
+                        }
+                    }
+                />
+                <motion.p
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.975 }}
+                    className="link"
+                >
+                    Volver a enviar código de recuperación
+                </motion.p>
+                <ActionButton>Ingresar</ActionButton>
+            </form>
+        </FormProvider>
     );
 }
 

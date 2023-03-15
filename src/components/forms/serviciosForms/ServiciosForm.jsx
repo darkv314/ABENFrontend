@@ -1,5 +1,5 @@
 import InputForm from "../formComponents/input/InputForm";
-import { useForm } from "react-hook-form";
+import { useForm, FormProvider, useFormContext } from "react-hook-form";
 import {
     errMsgRequired,
     errMsgEmail,
@@ -19,39 +19,41 @@ function ServiciosForm() {
     const {
         register,
         handleSubmit,
+        trigger,
         formState: { errors },
     } = useForm();
+    function onSubmit(data) {
+        console.log(data);
+    }
     const [itemList, setItemList] = useState([]);
     const [item, setItem] = useState(0);
     return (
         <div className="servicios-form">
             <div className="personal">
-                <form>
-                    {`${item + 1} de ${itemList.length + 1}`}
-                    {item === 0 ? (
-                        <InformacionPersonal
-                            register={register}
-                            errors={errors}
-                            setItem={setItem}
-                            setItemList={setItemList}
-                        />
-                    ) : (
-                        itemList[item - 1] ||
-                        setItemList((list) => [
-                            ...list,
-                            <ItemForm
-                                key={item}
-                                position={item}
-                                index={item - 1}
-                                errors={errors}
-                                register={register}
-                                id={id}
+                <FormProvider {...{ register, trigger, errors }}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        {`${item + 1} de ${itemList.length + 1}`}
+                        {item === 0 ? (
+                            <InformacionPersonal
                                 setItem={setItem}
                                 setItemList={setItemList}
-                            />,
-                        ])
-                    )}
-                </form>
+                            />
+                        ) : (
+                            itemList[item - 1] ||
+                            setItemList((list) => [
+                                ...list,
+                                <ItemForm
+                                    key={item}
+                                    position={item}
+                                    index={item - 1}
+                                    id={id}
+                                    setItem={setItem}
+                                    setItemList={setItemList}
+                                />,
+                            ])
+                        )}
+                    </form>
+                </FormProvider>
             </div>
         </div>
     );
@@ -59,12 +61,13 @@ function ServiciosForm() {
 
 export default ServiciosForm;
 
-function ItemForm({ position, id, register, errors, setItem }) {
+function ItemForm({ position, id, setItem }) {
     const animation = {
         hidden: { y: -10, opacity: 0 },
         visible: { y: 0, opacity: 1 },
         exit: { opacity: 0 },
     };
+    const { register, errors, trigger } = useFormContext();
     return (
         <AnimatePresence mode={"wait"}>
             <motion.div
@@ -107,7 +110,10 @@ function ItemForm({ position, id, register, errors, setItem }) {
                     <ActionButton
                         type="button"
                         className="servicio-button"
-                        handleClick={() => setItem((item) => item + 1)}
+                        handleClick={() => {
+                            trigger();
+                            // setItem((item) => item + 1);
+                        }}
                     >
                         Siguiente
                     </ActionButton>
@@ -117,13 +123,14 @@ function ItemForm({ position, id, register, errors, setItem }) {
     );
 }
 
-function InformacionPersonal({ register, errors, setItem }) {
+function InformacionPersonal({ setItem }) {
     const { auth } = useAuth();
     const { nombre, email, nit } = auth;
     const { id } = useParams();
     const onSubmit = (data) => {
         console.log(data);
     };
+    const { register, errors, trigger } = useFormContext();
     const animation = {
         hidden: { y: -10, opacity: 0 },
         visible: { y: 0, opacity: 1 },
@@ -202,11 +209,13 @@ function InformacionPersonal({ register, errors, setItem }) {
                     }}
                 />
             ) : null}
-
+            {console.log(errors)}
             <ActionButton
                 type="button"
                 handleClick={() => {
-                    setItem((item) => item + 1);
+                    trigger();
+                    Object.keys(errors).length === 0 &&
+                        setItem((item) => item + 1);
                 }}
             >
                 Siguiente
