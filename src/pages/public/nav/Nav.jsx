@@ -36,7 +36,7 @@ function Nav() {
                         type="button"
                         className="cart"
                         onClick={() => {
-                            // navigate("/inicio", { replace: true });
+                            navigate("/inicio", { replace: true });
                             navigate("/carrito", {
                                 state: { from: "/inicio" },
                             });
