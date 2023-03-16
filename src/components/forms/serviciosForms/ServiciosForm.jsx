@@ -13,8 +13,10 @@ import useAuth from "../../../hooks/useAuth";
 import { servicios } from "../../../pages/cliente/servicios/data";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import useCart from "../../../hooks/useShoppingCart";
 
 function ServiciosForm() {
+    const { cart, setCart } = useCart();
     const { id } = useParams();
     const {
         register,
@@ -23,15 +25,28 @@ function ServiciosForm() {
         formState: { errors },
     } = useForm();
     function onSubmit(data) {
-        console.log(data);
-        setItem((item) => item + 1);
+        setCart((data) => ({
+            ...data,
+            count: cart?.count + 1,
+            servicios: [
+                ...cart?.servicios,
+                {
+                    nombre: servicios[id].nombre,
+                    // items: [
+                    //     {
+
+                    //     }
+                    // ]
+                },
+            ],
+        }));
     }
     const [itemList, setItemList] = useState([]);
     const [item, setItem] = useState(0);
     return (
         <div className="servicios-form">
             <div className="personal">
-                <FormProvider {...{ register, trigger, errors }}>
+                <FormProvider {...{ register, trigger, errors, handleSubmit }}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {`${item + 1} de ${itemList.length + 1}`}
                         {item === 0 ? (
@@ -68,13 +83,18 @@ function ItemForm({ position, id, setItem }) {
         visible: { y: 0, opacity: 1 },
         exit: { opacity: 0 },
     };
-    const { register, errors, trigger } = useFormContext();
+    function siguiente(data) {
+        setItem((item) => item + 1);
+        // console.log(data);
+    }
+    const { register, errors, trigger, handleSubmit } = useFormContext();
     return (
         <AnimatePresence mode={"wait"}>
             <motion.div
                 variants={animation}
                 initial="hidden"
                 animate="visible"
+                transition={{ duration: "0.4" }}
                 exit="exit"
                 className="item-form"
             >
@@ -104,17 +124,14 @@ function ItemForm({ position, id, setItem }) {
                         Atrás
                     </ActionButton>
                     <ActionButton className="servicio-button">
-                        Finalizar
+                        Añadir al carrito
                     </ActionButton>
                     <ActionButton
                         type="button"
                         className="servicio-button"
-                        handleClick={() => {
-                            trigger();
-                            // setItem((item) => item + 1);
-                        }}
+                        handleClick={handleSubmit(siguiente)}
                     >
-                        Siguiente
+                        Añadir ítem
                     </ActionButton>
                 </div>
             </motion.div>
@@ -127,9 +144,9 @@ function InformacionPersonal({ setItem }) {
     const { nombre, email, nit } = auth;
     const { id } = useParams();
     const onSubmit = (data) => {
-        console.log(data);
+        setItem((item) => item + 1);
     };
-    const { register, errors, trigger } = useFormContext();
+    const { handleSubmit } = useFormContext();
     const animation = {
         hidden: { y: -10, opacity: 0 },
         visible: { y: 0, opacity: 1 },
@@ -141,6 +158,7 @@ function InformacionPersonal({ setItem }) {
             initial="hidden"
             animate="visible"
             exit="exit"
+            transition={{ duration: "0.4" }}
             className="personal-info"
         >
             <h2>Información personal</h2>
@@ -198,7 +216,9 @@ function InformacionPersonal({ setItem }) {
                     }}
                 />
             ) : null}
-            <ActionButton>Siguiente</ActionButton>
+            <ActionButton type={"button"} handleClick={handleSubmit(onSubmit)}>
+                Siguiente
+            </ActionButton>
         </motion.div>
     );
 }

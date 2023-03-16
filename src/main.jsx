@@ -5,6 +5,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ShoppingCartProvider } from "./context/ShoppingCartProvider";
 
 const client = new ApolloClient({
     uri: "http://localhost:3000/graphql",
@@ -16,9 +17,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ApolloProvider client={client}>
             <BrowserRouter>
                 <AuthProvider>
-                    <Routes>
-                        <Route path="/*" element={<App />} />
-                    </Routes>
+                    <ShoppingCartProvider>
+                        <Routes>
+                            <Route path="/*" element={<App />} />
+                        </Routes>
+                    </ShoppingCartProvider>
                 </AuthProvider>
             </BrowserRouter>
         </ApolloProvider>

@@ -40,6 +40,13 @@ nav {
     color: var(--primary-medium);
 }
 
+.cart {
+    color: whitesmoke;
+    border: none;
+    background-color: none;
+    cursor: pointer;
+}
+
 .cart-count {
     position: absolute;
     background-color: var(--red);

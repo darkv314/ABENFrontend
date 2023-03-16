@@ -7,10 +7,13 @@ import useAuth from "../../../hooks/useAuth";
 import ActionButton from "../../../components/buttons/actionButton/ActionButton";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import useCart from "../../../hooks/useShoppingCart";
 
 function Nav() {
+    const { cart } = useCart();
     const { auth } = useAuth();
     const [count, setCount] = useState(0);
+
     const navigate = useNavigate();
     return (
         <nav className="nav">
@@ -29,10 +32,19 @@ function Nav() {
             </div>
             {auth?.nombre ? (
                 <div className="nav-links">
-                    <div className="cart">
+                    <button
+                        type="button"
+                        className="cart"
+                        onClick={() => {
+                            // navigate("/inicio", { replace: true });
+                            navigate("/carrito", {
+                                state: { from: "/inicio" },
+                            });
+                        }}
+                    >
                         <FaShoppingCart />
-                        <span className="cart-count">{count}</span>
-                    </div>
+                        <span className="cart-count">{cart?.count}</span>
+                    </button>
                 </div>
             ) : (
                 <ActionButton

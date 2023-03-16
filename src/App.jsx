@@ -13,6 +13,7 @@ import RegisterForm from "./components/forms/loginForms/registerForm/RegisterFor
 import NewPasswordForm from "./components/forms/loginForms/newPasswordForm/NewPasswordForm";
 import PasswordForm from "./components/forms/loginForms/passwordForm/PasswordForm";
 import ServiciosForm from "./components/forms/serviciosForms/ServiciosForm";
+import Carrito from "./pages/cliente/carrito/Carrito";
 // import Home from "./pages/Home/Home";
 const roles = ["admin", "user", "lab"];
 
@@ -40,7 +41,7 @@ function App() {
                 {/* Protected Routes */}
                 <Route element={<RequireAuth allowedRoles={["cliente"]} />}>
                     <Route path="inicio" element={<Inicio />} />
-
+                    <Route path="carrito" element={<Carrito />} />
                     {/* <Route path="/" element={<Inicio />} /> */}
                 </Route>
                 {/* Missing */}
