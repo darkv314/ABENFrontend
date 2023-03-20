@@ -40,16 +40,23 @@ nav {
     color: var(--primary-medium);
 }
 
+.nav-links button {
+    border: none;
+}
+.nav-links button:hover {
+    cursor: pointer;
+}
+
 .cart {
     color: whitesmoke;
     border: none;
-    background-color: none;
     cursor: pointer;
 }
 
 .cart-count {
     position: absolute;
     background-color: var(--red);
+    font-family: "Raleway", sans-serif;
     text-align: center;
     display: flex;
     justify-content: center;

@@ -8,6 +8,7 @@ export const servicios = [
         descripcion:
             "El Laboratorio de Radiometría de la ABEN se dedica principalmente a la medición, la vigilancia y la evaluación radiológica en residuos de chatarra ferrosa, para la detección de una posible presencia de material radiactivo.",
         img: analisis,
+        precio: 100,
         preguntas: [
             {
                 label: "Cantidad de material en miles de toneladas",
@@ -49,6 +50,7 @@ export const servicios = [
             "Dosímetros de radiación portátiles de lectura directa.",
         ],
         img: calibracion,
+        precio: 200000,
         preguntas: [
             {
                 label: "Nombre del equipo",
@@ -88,6 +90,7 @@ export const servicios = [
             "Radiodiagnóstico convencional, tomografía fluoroscopía, mamografía y radiodiagnóstico dental",
         ],
         img: dosimetria,
+        precio: 300,
         preguntas: [
             {
                 label: "Nombre completo del trabajador",

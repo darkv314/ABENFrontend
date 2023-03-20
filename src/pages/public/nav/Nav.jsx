@@ -12,7 +12,6 @@ import useCart from "../../../hooks/useShoppingCart";
 function Nav() {
     const { cart } = useCart();
     const { auth } = useAuth();
-    const [count, setCount] = useState(0);
 
     const navigate = useNavigate();
     return (
@@ -43,6 +42,7 @@ function Nav() {
                         }}
                     >
                         <FaShoppingCart />
+
                         <span className="cart-count">{cart?.count}</span>
                     </button>
                 </div>

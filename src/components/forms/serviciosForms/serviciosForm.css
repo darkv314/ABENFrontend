@@ -46,8 +46,7 @@
 }
 
 .servicios-button {
-    background-color: red;
-    color: var(--primary);
+    padding: 1rem;
 }
 
 @media (max-width: 650px) {

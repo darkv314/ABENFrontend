@@ -25,18 +25,16 @@ function ServiciosForm() {
         formState: { errors },
     } = useForm();
     function onSubmit(data) {
-        setCart((data) => ({
-            ...data,
-            count: cart?.count + 1,
+        console.log(data);
+        setCart((items) => ({
+            ...items,
+            count: items.count + 1,
             servicios: [
-                ...cart?.servicios,
+                ...items.servicios,
                 {
                     nombre: servicios[id].nombre,
-                    // items: [
-                    //     {
-
-                    //     }
-                    // ]
+                    cantidad: item,
+                    precio: servicios[id].precio * item,
                 },
             ],
         }));

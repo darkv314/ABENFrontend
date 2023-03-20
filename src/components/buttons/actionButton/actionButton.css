@@ -10,6 +10,7 @@
 .loginForm-button:hover {
     background-color: var(--green);
     color: rgb(255, 255, 255);
+    cursor: pointer;
 }
 
 .loginForm-button:disabled {
