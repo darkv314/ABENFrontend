@@ -1,13 +1,14 @@
-import PhoneInput from "react-phone-input-2";
+// import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { Controller } from "react-hook-form";
 import {
     errMsgRequired,
     errMsgPhone,
     CODE_CHECK,
 } from "../../../../helpers/helpers";
 import ErrMsg from "../errMsg/ErrMsg";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
+import PI from "react-phone-input-2";
+const ReactPhoneInput = PI.default ? PI.default : PI;
 
 function PhoneInputForm() {
     const { control, errors } = useFormContext();
@@ -26,7 +27,7 @@ function PhoneInputForm() {
                     },
                 }}
                 render={({ field: { onChange } }) => (
-                    <PhoneInput
+                    <ReactPhoneInput
                         containerStyle={
                             errors["phone"]
                                 ? {

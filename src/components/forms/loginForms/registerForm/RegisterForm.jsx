@@ -1,14 +1,12 @@
 import InputForm from "../../formComponents/input/InputForm";
-import "react-phone-input-2/lib/style.css";
+// import "react-phone-input-2/lib/style.css";
 import {
     EMAIL_CHECK,
     errMsgRequired,
     errMsgEmail,
 } from "../../../../helpers/helpers";
-import "../../form.css";
 import { useForm, FormProvider } from "react-hook-form";
 import PhoneInputForm from "../../formComponents/input/PhoneInputForm";
-import { motion } from "framer-motion";
 import useAuth from "../../../../hooks/useAuth";
 import { gql, useMutation } from "@apollo/client";
 import ErrMsg from "../../formComponents/errMsg/ErrMsg";
