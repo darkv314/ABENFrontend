@@ -8,7 +8,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ShoppingCartProvider } from "./context/ShoppingCartProvider";
 
 const client = new ApolloClient({
-    uri: import.meta.env.VITE_DATABASE_URL,
+    uri: import.meta.env.VITE_BACKEND_URL,
     cache: new InMemoryCache(),
 });
 
