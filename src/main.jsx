@@ -8,7 +8,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ShoppingCartProvider } from "./context/ShoppingCartProvider";
 
 const client = new ApolloClient({
-    uri: "http://localhost:3000/graphql",
+    uri: import.meta.env.VITE_DATABASE_URL,
     cache: new InMemoryCache(),
 });
 
