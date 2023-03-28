@@ -32,6 +32,7 @@ function ServiciosForm() {
             servicios: [
                 ...items.servicios,
                 {
+                    id: items.servicios.length,
                     nombre: servicios[id].nombre,
                     cantidad: item,
                     precio: servicios[id].precio * item,

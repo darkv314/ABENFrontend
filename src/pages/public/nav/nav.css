@@ -29,7 +29,7 @@ nav {
     display: flex;
     align-items: center;
     text-align: center;
-    color: whitesmoke;
+    /* color: whitesmoke; */
     gap: 1rem;
     padding: 0 0.5rem;
 }

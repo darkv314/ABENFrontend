@@ -23,10 +23,12 @@ function Nav() {
                     </Link>
                 </div>
                 <div className="icon-container">
-                    <img
-                        src={logoPluri}
-                        alt="Logo Estado Plurinacional de Bolivia"
-                    />
+                    <Link to={"/inicio"}>
+                        <img
+                            src={logoPluri}
+                            alt="Logo Estado Plurinacional de Bolivia"
+                        />
+                    </Link>
                 </div>
             </div>
             {auth?.nombre ? (

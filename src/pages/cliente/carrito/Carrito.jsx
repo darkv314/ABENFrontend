@@ -20,7 +20,7 @@ function Carrito() {
                     cart?.servicios.map((servicio, index) => (
                         <Item
                             setCart={setCart}
-                            key={index}
+                            key={servicio.id}
                             index={index}
                             nombre={servicio.nombre}
                             cantidad={servicio.cantidad}
