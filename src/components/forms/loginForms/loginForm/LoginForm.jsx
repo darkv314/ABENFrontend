@@ -43,7 +43,8 @@ function LoginForm() {
         onCompleted: (data) => {
             const { nombre, id, email, nit, access_token, rol } = data.login;
             setAuth({ nombre, id, email, nit, access_token, rol });
-            navigate("/inicio");
+            if (rol?.nombre === "cliente") navigate("/inicio");
+            else if (rol?.nombre === "lab") navigate("/inicio-lab");
         },
     });
 

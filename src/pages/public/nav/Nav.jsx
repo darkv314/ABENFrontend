@@ -10,10 +10,20 @@ import { Link } from "react-router-dom";
 import useCart from "../../../hooks/useShoppingCart";
 
 function Nav() {
-    const { cart } = useCart();
     const { auth } = useAuth();
 
-    const navigate = useNavigate();
+    function navType() {
+        if (auth?.rol?.nombre === "cliente") {
+            return clientNav();
+        } else if (auth?.rol?.nombre === "administrador") {
+            return adminNav();
+        } else if (auth?.rol?.nombre === "lab") {
+            return labNav();
+        } else {
+            return noNav();
+        }
+    }
+
     return (
         <nav className="nav">
             <div className="nav-icons">
@@ -31,33 +41,53 @@ function Nav() {
                     </Link>
                 </div>
             </div>
-            {auth?.nombre ? (
-                <div className="nav-links">
-                    <button
-                        type="button"
-                        className="cart"
-                        onClick={() => {
-                            navigate("/inicio", { replace: true });
-                            navigate("/carrito", {
-                                state: { from: "/inicio" },
-                            });
-                        }}
-                    >
-                        <FaShoppingCart />
-
-                        <span className="cart-count">{cart?.count}</span>
-                    </button>
-                </div>
-            ) : (
-                <ActionButton
-                    type="button"
-                    handleClick={() => navigate("/registro")}
-                >
-                    Regístrate
-                </ActionButton>
-            )}
+            {navType()}
         </nav>
     );
 }
 
 export default Nav;
+
+function noNav() {
+    const navigate = useNavigate();
+    return (
+        <ActionButton type="button" handleClick={() => navigate("/registro")}>
+            Regístrate
+        </ActionButton>
+    );
+}
+
+function clientNav() {
+    const { cart } = useCart();
+    const navigate = useNavigate();
+    const { auth } = useAuth();
+    return (
+        <div className="nav-links">
+            <button
+                type="button"
+                className="cart"
+                onClick={() => {
+                    navigate("/inicio", { replace: true });
+                    navigate("/carrito", {
+                        state: { from: "/inicio" },
+                    });
+                }}
+            >
+                <FaShoppingCart />
+
+                <span className="cart-count">{cart?.count}</span>
+            </button>
+        </div>
+    );
+}
+
+function labNav() {
+    const navigate = useNavigate();
+    return (
+        <div className="nav-links">
+            <ActionButton type="button" handleClick={() => navigate("/tareas")}>
+                Mis tareas
+            </ActionButton>
+        </div>
+    );
+}

@@ -45,7 +45,7 @@ function Inicio() {
         <div className="inicio">
             <IntroInicio />
             <Services />
-            {console.log(data)}
+            {/* {console.log(data)} */}
             <HiredServices data={data} />
         </div>
     );
