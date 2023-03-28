@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Services from "../../../components/services/Services";
 import "./inicio.css";
 
@@ -27,14 +27,25 @@ function Inicio() {
         }
     `;
 
-    const { data, loading, error } = useQuery(GET_SERVICES, {
-        context: { headers: { authorization: `Bearer ${auth.access_token}` } },
-    });
+    const { data, loading, error, startPolling, stopPolling } = useQuery(
+        GET_SERVICES,
+        {
+            // pollInterval: 500,
+            context: {
+                headers: { authorization: `Bearer ${auth.access_token}` },
+            },
+        }
+    );
+
+    useEffect(() => {
+        startPolling(2000);
+    }, []);
 
     return (
         <div className="inicio">
             <IntroInicio />
             <Services />
+            {console.log(data)}
             <HiredServices data={data} />
         </div>
     );

@@ -11,6 +11,7 @@ function CardService({ title, img, id }) {
 
     return (
         <motion.div
+            tabIndex={0}
             onClick={handleClick}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.975 }}
