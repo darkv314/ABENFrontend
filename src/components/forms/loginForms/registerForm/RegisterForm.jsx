@@ -30,6 +30,8 @@ function RegisterForm() {
             signup(cliente: $input) {
                 nombre
                 access_token
+                email
+                nit
                 id
                 rol {
                     nombre
@@ -40,8 +42,8 @@ function RegisterForm() {
 
     const [signup, { data, loading, error }] = useMutation(REGISTER, {
         onCompleted: (data) => {
-            const { nombre, id, access_token, rol } = data.signup;
-            setAuth({ nombre, id, access_token, rol });
+            const { nombre, id, email, nit, access_token, rol } = data.signup;
+            setAuth({ nombre, id, email, nit, access_token, rol });
             navigate("/inicio");
         },
     });
