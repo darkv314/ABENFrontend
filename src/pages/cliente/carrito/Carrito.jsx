@@ -31,6 +31,14 @@ function Carrito() {
                     <h1>No hay servicios en el carrito</h1>
                 )}
             </div>
+            <div className="comprarButton">
+                <ActionButton
+                    type="button"
+                    handleClick={() => console.log(cart)}
+                >
+                    Solicitar
+                </ActionButton>
+            </div>
 
             <Services />
         </div>

@@ -23,32 +23,30 @@ function ServiciosForm() {
         register,
         handleSubmit,
         trigger,
-        reset,
         formState: { errors },
     } = useForm({
         resetOptions: {
-            keepDirtyValues: true
-        }
+            keepDirtyValues: true,
+        },
     });
     function onSubmit(data) {
-        console.log(data);
+        // console.log(data);
         let formInfo = {};
         const elements = [];
-        Object.keys(data).forEach(key => {
-            console.log(key);
-            if(key.includes('-')){
+        Object.keys(data).forEach((key) => {
+            // console.log(key);
+            if (key.includes("-")) {
                 const newKey = {};
                 newKey[key] = data[key];
-                elements[parseInt(key.split('-')[1])] = {
-                    ...elements[parseInt(key.split('-')[1])],
-                    ...newKey
-                }
-                elements[parseInt(key.split('-')[1])][key]=data[key]
-                
+                elements[parseInt(key.split("-")[1])] = {
+                    ...elements[parseInt(key.split("-")[1])],
+                    ...newKey,
+                };
+                elements[parseInt(key.split("-")[1])][key] = data[key];
             } else {
                 formInfo[key] = data[key];
             }
-        })
+        });
         setCart((items) => ({
             ...items,
             count: items.count + 1,
@@ -60,19 +58,19 @@ function ServiciosForm() {
                     cantidad: item,
                     precio: servicios[id].precio * item,
                     info: formInfo,
-                    items: elements
+                    items: elements,
                 },
             ],
         }));
-        navigate("/inicio", { replace: true })
-        navigate('/carrito');
+        navigate("/inicio", { replace: true });
+        navigate("/carrito");
     }
     const [itemList, setItemList] = useState([]);
     const [item, setItem] = useState(0);
     return (
         <div className="servicios-form">
             <div className="personal">
-                <FormProvider {...{ register, reset, trigger, errors, handleSubmit }}>
+                <FormProvider {...{ register, trigger, errors, handleSubmit }}>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {`${item + 1} de ${itemList.length + 1}`}
                         {item === 0 ? (
@@ -86,7 +84,7 @@ function ServiciosForm() {
                                 ...list,
                                 <ItemForm
                                     key={item}
-                                    position={item-1}
+                                    position={item - 1}
                                     index={item - 1}
                                     id={id}
                                     setItem={setItem}
@@ -113,7 +111,7 @@ function ItemForm({ position, id, setItem }) {
         setItem((item) => item + 1);
         // console.log(data);
     }
-    const { reset, handleSubmit } = useFormContext();
+    const { handleSubmit } = useFormContext();
     return (
         <AnimatePresence mode={"wait"}>
             <motion.div
@@ -173,7 +171,7 @@ function InformacionPersonal({ setItem }) {
         // console.log(data, "personal form");
         setItem((item) => item + 1);
     };
-    const { handleSubmit, reset } = useFormContext();
+    const { handleSubmit } = useFormContext();
     const animation = {
         hidden: { y: -10, opacity: 0 },
         visible: { y: 0, opacity: 1 },
