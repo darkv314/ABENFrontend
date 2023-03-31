@@ -1,11 +1,13 @@
 .cart-section {
     display: grid;
-    grid-template-rows: 60% 5% 35%;
+    grid-template-rows: 60% 5% 32.5%;
+    gap: 0.5rem;
 }
 
 .comprarButton {
     display: grid;
     place-content: center;
+    padding-top: 1rem;
 }
 
 .mas-servicios h2 {
@@ -19,6 +21,7 @@
     flex-direction: column;
     gap: 1rem;
     grid-template-rows: auto;
+    box-shadow: 1px 1px 5px black;
 }
 
 .cart-items h1 {
