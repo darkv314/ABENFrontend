@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import "./actionButton.css";
 
-function ActionButton({ handleClick, children, type }) {
+function ActionButton({ handleClick, children, type, disabled }) {
     function onClick() {
         handleClick ? handleClick() : null;
     }
@@ -12,6 +12,7 @@ function ActionButton({ handleClick, children, type }) {
             whileTap={{ scale: 0.975 }}
             onClick={onClick}
             className="loginForm-button"
+            disabled={disabled || false}
         >
             {children}
         </motion.button>

@@ -6,7 +6,7 @@ import {
     EMAIL_CHECK,
 } from "../../../helpers/helpers";
 import { useNavigate, useParams } from "react-router";
-
+import PhoneInputForm from "../formComponents/input/PhoneInputForm";
 import "./serviciosForm.css";
 import ActionButton from "../../buttons/actionButton/ActionButton";
 import useAuth from "../../../hooks/useAuth";
@@ -14,6 +14,10 @@ import { servicios } from "../../../pages/cliente/servicios/data";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import useCart from "../../../hooks/useShoppingCart";
+import { useEffect } from "react";
+import MainAlert from "../../alerts/MainAlert";
+
+let env = false;
 
 function ServiciosForm() {
     const navigate = useNavigate();
@@ -23,6 +27,7 @@ function ServiciosForm() {
         register,
         handleSubmit,
         trigger,
+        control,
         formState: { errors },
     } = useForm({
         resetOptions: {
@@ -67,10 +72,54 @@ function ServiciosForm() {
     }
     const [itemList, setItemList] = useState([]);
     const [item, setItem] = useState(0);
+    const [courrier, setCourrier] = useState(false);
+    const [accepted, setAccepted] = useState(false);
+    useEffect(() => {
+        if (
+            itemList.length === 6 &&
+            servicios[id].nombre === "Lectura de dosímetros"
+        ) {
+            setCourrier(true);
+            env = true;
+        }
+    }, [itemList]);
+
+    function onClose() {
+        setCourrier(false);
+        setAccepted(false);
+    }
     return (
         <div className="servicios-form">
+            {courrier && (
+                <MainAlert
+                    title="Servicio de Recojo y Entrega de dosímetros"
+                    description="Has registrado 6 dosimetros o más, ¿Deseas solicitar el servicio de Recojo y Entrega de dosimetros? El costo por dosimetro son de 5Bs"
+                    onClose={onClose}
+                >
+                    {accepted ? (
+                        <InformacionCourrier setAccepted={setAccepted} />
+                    ) : (
+                        <div className="button-section">
+                            <ActionButton
+                                type="button"
+                                handleClick={() => setAccepted(true)}
+                            >
+                                Sí
+                            </ActionButton>
+                            <ActionButton
+                                type="button"
+                                handleClick={() => setCourrier(false)}
+                            >
+                                No
+                            </ActionButton>
+                        </div>
+                    )}
+                </MainAlert>
+            )}
             <div className="personal">
-                <FormProvider {...{ register, trigger, errors, handleSubmit }}>
+                <FormProvider
+                    {...{ register, control, trigger, errors, handleSubmit }}
+                >
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {`${item + 1} de ${itemList.length + 1}`}
                         {item === 0 ? (
@@ -83,6 +132,7 @@ function ServiciosForm() {
                             setItemList((list) => [
                                 ...list,
                                 <ItemForm
+                                    setCourrier={setCourrier}
                                     key={item}
                                     position={item - 1}
                                     index={item - 1}
@@ -101,7 +151,7 @@ function ServiciosForm() {
 
 export default ServiciosForm;
 
-function ItemForm({ position, id, setItem }) {
+function ItemForm({ position, id, setItem, setCourrier }) {
     const animation = {
         hidden: { y: -10, opacity: 0 },
         visible: { y: 0, opacity: 1 },
@@ -122,7 +172,17 @@ function ItemForm({ position, id, setItem }) {
                 exit="exit"
                 className="item-form"
             >
-                <h2>{servicios[id]?.nombre}</h2>
+                <div className="form-header">
+                    <h2>{servicios[id]?.nombre}</h2>
+                    {env && (
+                        <ActionButton
+                            type="button"
+                            handleClick={() => setCourrier(true)}
+                        >
+                            Activar recojo y entrega
+                        </ActionButton>
+                    )}
+                </div>
                 {servicios[id]?.preguntas?.map((pregunta, index) => (
                     <InputForm
                         key={index}
@@ -222,14 +282,7 @@ function InformacionPersonal({ setItem }) {
                 }}
                 value={nit}
             />
-            <InputForm
-                id="dir"
-                label="Dirección"
-                type="text"
-                validations={{
-                    required: errMsgRequired,
-                }}
-            />
+            <PhoneInputForm />
 
             {id === "2" ? (
                 <InputForm
@@ -245,5 +298,72 @@ function InformacionPersonal({ setItem }) {
                 Siguiente
             </ActionButton>
         </motion.div>
+    );
+}
+
+function InformacionCourrier({ setAccepted }) {
+    const {
+        register,
+        handleSubmit,
+        trigger,
+        formState: { errors },
+    } = useForm();
+
+    const animation = {
+        hidden: { x: -10, opacity: 0 },
+        visible: { x: 0, opacity: 1 },
+        exit: { x: 10, opacity: 0 },
+    };
+    function onSubmit(data) {
+        console.log(data);
+    }
+    function onCancel() {
+        setAccepted(false);
+    }
+    return (
+        <AnimatePresence mode={"wait"}>
+            <FormProvider {...{ register, errors }}>
+                <motion.form
+                    variants={animation}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    transition={{ duration: "0.5" }}
+                    className="courrier-info"
+                >
+                    <h3>Información para el servicio de Envío y Recojo</h3>
+                    <InputForm
+                        id="nombreReceptor"
+                        label="Nombre del receptor"
+                        type="text"
+                        validations={{
+                            required: errMsgRequired,
+                        }}
+                        // value={nombre}
+                    />
+
+                    <InputForm
+                        id="direccion"
+                        label="Dirección"
+                        type="text"
+                        validations={{
+                            required: errMsgRequired,
+                        }}
+                        // value={nit}
+                    />
+                    <div className="courrier-buttons">
+                        <ActionButton type={"button"} handleClick={onCancel}>
+                            Cancelar
+                        </ActionButton>
+                        <ActionButton
+                            type={"button"}
+                            handleClick={handleSubmit(onSubmit)}
+                        >
+                            Confirmar
+                        </ActionButton>
+                    </div>
+                </motion.form>
+            </FormProvider>
+        </AnimatePresence>
     );
 }

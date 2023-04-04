@@ -90,6 +90,9 @@ export function ServiciosDescripcion() {
                       )
                     : servicios[id].descripcion}
             </div>
+            {servicios[id]?.warning && (
+                <p className="warning-text">{servicios[id].warning}</p>
+            )}
         </div>
     );
 }
