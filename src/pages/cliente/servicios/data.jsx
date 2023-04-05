@@ -77,7 +77,7 @@ export const servicios = [
     {
         nombre: "Lectura de dosímetros",
         warning:
-            "El servicio de lectura de dosímetros cuenta con un servicio opcional extra de courrier que es activable a partir de los 6 dosímetros, con un costo de 5Bs por dosimetro.",
+            "El servicio de lectura de dosímetros cuenta con un servicio opcional extra de logistica de recojo y envío que es activable a partir de los 6 dosímetros, con un costo de 5Bs por dosimetro.",
         descripcion: [
             "El servicio de dosimetría personal se aplica en los sectores de:",
             "items",
