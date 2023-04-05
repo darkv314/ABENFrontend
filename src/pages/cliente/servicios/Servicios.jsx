@@ -4,6 +4,7 @@ import "./servicios.css";
 import { servicios } from "./data";
 import ActionButton from "../../../components/buttons/actionButton/ActionButton";
 import useAuth from "../../../hooks/useAuth";
+import { LogisticaProvider } from "../../../context/LogisticaProvider";
 
 function Servicios() {
     const { id } = useParams();
@@ -24,7 +25,9 @@ function Servicios() {
             className="servicios"
             style={{ maxHeight: `calc(100vh - ${navHeight}px)` }}
         >
-            <Outlet />
+            <LogisticaProvider>
+                <Outlet />
+            </LogisticaProvider>
             <div
                 className="servicios-img"
                 style={{ backgroundImage: `url(${servicios[id].img})` }}

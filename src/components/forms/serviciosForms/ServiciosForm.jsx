@@ -16,8 +16,7 @@ import { useState } from "react";
 import useCart from "../../../hooks/useShoppingCart";
 import { useEffect } from "react";
 import MainAlert from "../../alerts/MainAlert";
-
-let env = false;
+import useLogistica from "../../../hooks/useLogistica";
 
 function ServiciosForm() {
     const navigate = useNavigate();
@@ -64,6 +63,7 @@ function ServiciosForm() {
                     precio: servicios[id].precio * item,
                     info: formInfo,
                     items: elements,
+                    courrierInfo,
                 },
             ],
         }));
@@ -74,13 +74,15 @@ function ServiciosForm() {
     const [item, setItem] = useState(0);
     const [courrier, setCourrier] = useState(false);
     const [accepted, setAccepted] = useState(false);
+    const { logistica, setLogistica } = useLogistica();
+    const [courrierInfo, setCourrierInfo] = useState(null);
     useEffect(() => {
         if (
             itemList.length === 6 &&
             servicios[id].nombre === "Lectura de dosímetros"
         ) {
             setCourrier(true);
-            env = true;
+            setLogistica(true);
         }
     }, [itemList]);
 
@@ -97,7 +99,10 @@ function ServiciosForm() {
                     onClose={onClose}
                 >
                     {accepted ? (
-                        <InformacionCourrier setAccepted={setAccepted} />
+                        <InformacionCourrier
+                            setAccepted={setAccepted}
+                            setCourrierInfo={setCourrierInfo}
+                        />
                     ) : (
                         <div className="button-section">
                             <ActionButton
@@ -118,7 +123,13 @@ function ServiciosForm() {
             )}
             <div className="personal">
                 <FormProvider
-                    {...{ register, control, trigger, errors, handleSubmit }}
+                    {...{
+                        register,
+                        control,
+                        trigger,
+                        errors,
+                        handleSubmit,
+                    }}
                 >
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {`${item + 1} de ${itemList.length + 1}`}
@@ -162,6 +173,7 @@ function ItemForm({ position, id, setItem, setCourrier }) {
         // console.log(data);
     }
     const { handleSubmit } = useFormContext();
+    const { logistica } = useLogistica();
     return (
         <AnimatePresence mode={"wait"}>
             <motion.div
@@ -174,7 +186,7 @@ function ItemForm({ position, id, setItem, setCourrier }) {
             >
                 <div className="form-header">
                     <h2>{servicios[id]?.nombre}</h2>
-                    {env && (
+                    {logistica && (
                         <ActionButton
                             type="button"
                             handleClick={() => setCourrier(true)}
@@ -301,7 +313,7 @@ function InformacionPersonal({ setItem }) {
     );
 }
 
-function InformacionCourrier({ setAccepted }) {
+function InformacionCourrier({ setAccepted, setCourrierInfo }) {
     const {
         register,
         handleSubmit,
@@ -316,6 +328,7 @@ function InformacionCourrier({ setAccepted }) {
     };
     function onSubmit(data) {
         console.log(data);
+        setCourrierInfo(data);
     }
     function onCancel() {
         setAccepted(false);
