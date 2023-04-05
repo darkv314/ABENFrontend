@@ -17,6 +17,7 @@ import useCart from "../../../hooks/useShoppingCart";
 import { useEffect } from "react";
 import MainAlert from "../../alerts/MainAlert";
 import useLogistica from "../../../hooks/useLogistica";
+import { TbCircleCheck } from "react-icons/tb";
 
 function ServiciosForm() {
     const navigate = useNavigate();
@@ -82,7 +83,13 @@ function ServiciosForm() {
             servicios[id].nombre === "Lectura de dosímetros"
         ) {
             setCourrier(true);
-            setLogistica(true);
+            setLogistica((oldLogistica) => {
+                return {
+                    ...oldLogistica,
+                    buttonActive: true,
+                    buttonAccepted: false,
+                };
+            });
         }
     }, [itemList]);
 
@@ -101,7 +108,9 @@ function ServiciosForm() {
                     {accepted ? (
                         <InformacionCourrier
                             setAccepted={setAccepted}
+                            setCourrier={setCourrier}
                             setCourrierInfo={setCourrierInfo}
+                            courrierInfo={courrierInfo}
                         />
                     ) : (
                         <div className="button-section">
@@ -186,14 +195,18 @@ function ItemForm({ position, id, setItem, setCourrier }) {
             >
                 <div className="form-header">
                     <h2>{servicios[id]?.nombre}</h2>
-                    {logistica && (
+                    {logistica.buttonActive ? (
                         <ActionButton
                             type="button"
                             handleClick={() => setCourrier(true)}
                         >
-                            Activar recojo y entrega
+                            {logistica.buttonAccepted ? (
+                                <TbCircleCheck />
+                            ) : (
+                                "Activar recojo y entrega"
+                            )}
                         </ActionButton>
-                    )}
+                    ) : null}
                 </div>
                 {servicios[id]?.preguntas?.map((pregunta, index) => (
                     <InputForm
@@ -313,7 +326,12 @@ function InformacionPersonal({ setItem }) {
     );
 }
 
-function InformacionCourrier({ setAccepted, setCourrierInfo }) {
+function InformacionCourrier({
+    setAccepted,
+    setCourrier,
+    setCourrierInfo,
+    courrierInfo,
+}) {
     const {
         register,
         handleSubmit,
@@ -321,6 +339,7 @@ function InformacionCourrier({ setAccepted, setCourrierInfo }) {
         formState: { errors },
     } = useForm();
 
+    const { logistica, setLogistica } = useLogistica();
     const animation = {
         hidden: { x: -10, opacity: 0 },
         visible: { x: 0, opacity: 1 },
@@ -329,9 +348,17 @@ function InformacionCourrier({ setAccepted, setCourrierInfo }) {
     function onSubmit(data) {
         console.log(data);
         setCourrierInfo(data);
+        setCourrier(false);
+        setLogistica((logistica) => {
+            return { ...logistica, buttonAccepted: true };
+        });
     }
     function onCancel() {
         setAccepted(false);
+        setLogistica((logistica) => {
+            return { ...logistica, buttonAccepted: false };
+        });
+        setCourrierInfo(null);
     }
     return (
         <AnimatePresence mode={"wait"}>
@@ -352,7 +379,7 @@ function InformacionCourrier({ setAccepted, setCourrierInfo }) {
                         validations={{
                             required: errMsgRequired,
                         }}
-                        // value={nombre}
+                        value={courrierInfo?.nombreReceptor}
                     />
 
                     <InputForm
@@ -362,7 +389,7 @@ function InformacionCourrier({ setAccepted, setCourrierInfo }) {
                         validations={{
                             required: errMsgRequired,
                         }}
-                        // value={nit}
+                        value={courrierInfo?.direccion}
                     />
                     <div className="courrier-buttons">
                         <ActionButton type={"button"} handleClick={onCancel}>
