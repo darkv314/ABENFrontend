@@ -214,6 +214,7 @@ function ItemForm({ position, id, setItem, setCourrier }) {
                         label={pregunta?.label}
                         id={`${pregunta?.id}-${position}`}
                         type={pregunta?.type}
+                        options={pregunta?.options}
                         validations={{
                             required: errMsgRequired,
                         }}

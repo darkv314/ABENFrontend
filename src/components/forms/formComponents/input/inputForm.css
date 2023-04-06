@@ -14,6 +14,31 @@
     /* outline-color: red; */
 }
 
+.input-form select {
+    font-family: inherit;
+    border-radius: 0.2rem;
+    padding: 0.75em;
+    border-color: var(--primary);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* padding-right: 16px; */
+    background: url("../../../icons/downArrow.svg") no-repeat right center /
+        1rem;
+    background-position-x: calc(100% - 0.75rem);
+}
+
+.input-form select:hover {
+    cursor: pointer;
+}
+
+.input-form select:focus {
+    /* border: none; */
+    outline-color: var(--primary-brilliant);
+    outline-width: 0.05rem;
+    outline-style: solid;
+}
+
 .input-form input:focus {
     outline-color: var(--primary-brilliant);
     outline-width: 0.1rem;

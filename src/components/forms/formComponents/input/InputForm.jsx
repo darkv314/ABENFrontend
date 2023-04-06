@@ -4,7 +4,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import "./inputForm.css";
 import { useFormContext } from "react-hook-form";
 
-function InputForm({ id, label, type, validations, value }) {
+function InputForm({ id, label, type, validations, value, options }) {
     const [showPassword, setShowPassword] = useState(false);
     const { register, errors } = useFormContext();
     return (
@@ -27,13 +27,19 @@ function InputForm({ id, label, type, validations, value }) {
                         {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
                     </button>
                 </div>
-            ) : (
+            ) : type === "text" || type === "number" ? (
                 <input
                     style={errors[id] ? { outline: "2px solid red" } : null}
                     type={type}
                     defaultValue={value}
                     {...register(id, validations)}
                 />
+            ) : (
+                <select {...register(id)}>
+                    {options?.map((option) => (
+                        <option value={option.nombre}>{option.nombre}</option>
+                    ))}
+                </select>
             )}
             <ErrMsg errors={errors[id]} />
         </div>
