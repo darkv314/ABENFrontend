@@ -48,14 +48,14 @@ nav {
 }
 
 .cart {
-    color: whitesmoke;
+    /* color: whitesmoke; */
     border: none;
     cursor: pointer;
 }
 
 .cart-count {
     position: absolute;
-    background-color: var(--red);
+    background-color: var(--green);
     font-family: "Raleway", sans-serif;
     text-align: center;
     display: flex;

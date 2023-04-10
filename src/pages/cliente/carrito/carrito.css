@@ -1,13 +1,14 @@
 .cart-section {
     display: grid;
-    grid-template-rows: 60% 5% 32.5%;
-    gap: 0.5rem;
+    grid-template-rows: 50% 10% auto;
+    /* gap: 0.5rem; */
 }
 
 .comprarButton {
     display: grid;
     align-items: center;
-    padding: 0.75rem 0;
+    padding-top: 1rem;
+    /* padding: 0.75rem 0; */
 }
 .comprarButton button {
     justify-self: center;
@@ -23,7 +24,7 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
+    box-shadow: 1px 1px 5px black;
     gap: 1rem;
     background: linear-gradient(
         180deg,
