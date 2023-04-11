@@ -65,6 +65,12 @@
     justify-self: center;
 } */
 
+@media (max-width: 300px) {
+    .form-container {
+        padding: 1.5rem 2rem;
+    }
+}
+
 @media (max-width: 700px) {
     .ads-container {
         display: none;

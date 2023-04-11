@@ -14,7 +14,7 @@ export const servicios = [
         preguntas: [
             {
                 label: "Tipo de análisis",
-                type: "selection",
+                type: "select",
                 id: "tipoAnalisis",
                 options: [
                     {

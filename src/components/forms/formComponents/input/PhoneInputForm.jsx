@@ -10,7 +10,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import PI from "react-phone-input-2";
 const ReactPhoneInput = PI.default ? PI.default : PI;
 
-function PhoneInputForm() {
+function PhoneInputForm({ value }) {
     const { control, errors } = useFormContext();
     return (
         <div className="input-form">
@@ -26,8 +26,11 @@ function PhoneInputForm() {
                         message: errMsgPhone,
                     },
                 }}
-                render={({ field: { onChange } }) => (
+                defaultValue={value}
+                shouldUnregister={false}
+                render={({ field: { onChange, value } }) => (
                     <ReactPhoneInput
+                        value={value}
                         containerStyle={
                             errors["phone"]
                                 ? {
@@ -46,7 +49,14 @@ function PhoneInputForm() {
                         }}
                         buttonStyle={{ border: "none" }}
                         regions={["south-america"]}
-                        onChange={onChange}
+                        onChange={(value, data, event, formattedValue) => {
+                            // handleOnChange(value, data, event, formattedValue);
+                            onChange(
+                                `+${data.dialCode} ${value.slice(
+                                    data.dialCode.length
+                                )}`
+                            );
+                        }}
                     />
                 )}
             ></Controller>

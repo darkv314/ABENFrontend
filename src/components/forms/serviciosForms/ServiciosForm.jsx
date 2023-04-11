@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import MainAlert from "../../alerts/MainAlert";
 import useLogistica from "../../../hooks/useLogistica";
 import { TbCircleCheck } from "react-icons/tb";
+import SelectInputForm from "../formComponents/input/SelectInputForm";
 
 function ServiciosForm() {
     const navigate = useNavigate();
@@ -208,18 +209,26 @@ function ItemForm({ position, id, setItem, setCourrier }) {
                         </ActionButton>
                     ) : null}
                 </div>
-                {servicios[id]?.preguntas?.map((pregunta, index) => (
-                    <InputForm
-                        key={index}
-                        label={pregunta?.label}
-                        id={`${pregunta?.id}-${position}`}
-                        type={pregunta?.type}
-                        options={pregunta?.options}
-                        validations={{
-                            required: errMsgRequired,
-                        }}
-                    />
-                ))}
+                {servicios[id]?.preguntas?.map((pregunta, index) =>
+                    pregunta?.type === "select" ? (
+                        <SelectInputForm
+                            id={`${pregunta?.id}-${position}`}
+                            label={pregunta?.label}
+                            options={pregunta?.options}
+                            key={index}
+                        />
+                    ) : (
+                        <InputForm
+                            key={index}
+                            label={pregunta?.label}
+                            id={`${pregunta?.id}-${position}`}
+                            type={pregunta?.type}
+                            validations={{
+                                required: errMsgRequired,
+                            }}
+                        />
+                    )
+                )}
                 <div className="servicios-buttons">
                     <ActionButton
                         className="servicio-button"
@@ -251,7 +260,7 @@ function ItemForm({ position, id, setItem, setCourrier }) {
 
 function InformacionPersonal({ setItem }) {
     const { auth } = useAuth();
-    const { nombre, email, nit } = auth;
+    const { nombre, email, nit, telefono } = auth;
     const { id } = useParams();
     const onSubmit = (data) => {
         // console.log(data, "personal form");
@@ -308,7 +317,7 @@ function InformacionPersonal({ setItem }) {
                 }}
                 value={nit}
             />
-            <PhoneInputForm />
+            <PhoneInputForm value={telefono} />
 
             {id === "2" ? (
                 <InputForm

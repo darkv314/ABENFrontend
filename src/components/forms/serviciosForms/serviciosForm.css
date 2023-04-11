@@ -2,6 +2,9 @@
     padding: 0.75rem 2.5rem;
     width: 100%;
     max-height: 90%;
+    min-height: 60%;
+    display: grid;
+    align-items: center;
     overflow-y: auto;
 }
 
@@ -20,6 +23,14 @@
 
 .personal div input {
     outline: 1px solid var(--primary);
+}
+
+.select-input input {
+    outline: none !important;
+}
+
+.select-input input:focus {
+    outline: none !important;
 }
 
 .servicios-form::-webkit-scrollbar {
@@ -53,6 +64,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
+}
+
+.servicios-form::-webkit-scrollbar {
+    height: 10px;
+    /* margin: 1rem; */
 }
 
 .servicios-form::-webkit-scrollbar-track {

@@ -31,6 +31,7 @@ function LoginForm() {
                 id
                 email
                 nit
+                telefono
                 rol {
                     id
                     nombre
@@ -41,8 +42,9 @@ function LoginForm() {
 
     const [login, { data, loading, error }] = useMutation(LOGIN, {
         onCompleted: (data) => {
-            const { nombre, id, email, nit, access_token, rol } = data.login;
-            setAuth({ nombre, id, email, nit, access_token, rol });
+            const { nombre, id, email, nit, access_token, rol, telefono } =
+                data.login;
+            setAuth({ nombre, id, email, nit, access_token, rol, telefono });
             if (rol?.nombre === "cliente") navigate("/inicio");
             else if (rol?.nombre === "lab") navigate("/inicio-lab");
         },
