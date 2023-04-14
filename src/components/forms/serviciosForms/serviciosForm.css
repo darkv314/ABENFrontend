@@ -25,6 +25,11 @@
     outline: 1px solid var(--primary);
 }
 
+.analisis-info {
+    display: grid;
+    gap: 1rem;
+}
+
 .select-input input {
     outline: none !important;
     font-family: "Raleway", sans-serif !important;

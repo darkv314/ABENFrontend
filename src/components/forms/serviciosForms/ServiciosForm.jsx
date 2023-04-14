@@ -57,6 +57,9 @@ function ServiciosForm() {
                 formInfo[key] = data[key];
             }
         });
+        const precio = elements.reduce((acc, cur, index) => {
+            return acc + cur[`precio-${index}`];
+        }, 0);
         setCart((items) => ({
             ...items,
             count: items.count + 1,
@@ -66,7 +69,7 @@ function ServiciosForm() {
                     id: items.servicios.length,
                     nombre: servicios[id].nombre,
                     cantidad: item,
-                    precio: servicios[id].precio * item,
+                    precio: precio || servicios[id].precio * item,
                     info: formInfo,
                     items: elements,
                     courrierInfo,
@@ -215,13 +218,19 @@ function ItemForm({ position, id, setItem, setCourrier }) {
                 </div>
                 {servicios[id]?.preguntas?.map((pregunta, index) =>
                     pregunta?.type === "select" ? (
-                        <MultipleSelectInput
-                            id={`${pregunta?.id}-${position}`}
-                            label={pregunta?.label}
-                            options={pregunta?.options}
-                            key={position}
-                            index={position}
-                        />
+                        <>
+                            <MultipleSelectInput
+                                id={`${pregunta?.id}-${position}`}
+                                label={pregunta?.label}
+                                options={pregunta?.options}
+                                key={position}
+                                index={position}
+                            />
+                            {servicios[id]?.nombre ===
+                            "Análisis de muestras" ? (
+                                <AnalisisForm index={position} />
+                            ) : null}
+                        </>
                     ) : (
                         <InputForm
                             key={index}
@@ -260,6 +269,36 @@ function ItemForm({ position, id, setItem, setCourrier }) {
                 </div>
             </motion.div>
         </AnimatePresence>
+    );
+}
+
+function AnalisisForm({ index }) {
+    return (
+        <div className="analisis-info">
+            <h2>Información de la muestra</h2>
+            <InputForm
+                id={`procedencia-${index}`}
+                label="Procedencia de la muestra"
+                type="text"
+                validations={{
+                    required: errMsgRequired,
+                }}
+            />
+            <InputForm
+                id={`identificacion-${index}`}
+                label="Identificación de la muestra"
+                type="text"
+                validations={{
+                    required: errMsgRequired,
+                }}
+            />
+            <InputForm
+                id={`coordenadas-${index}`}
+                label="Coordenadas georeferenciadas (opcional)"
+                type="text"
+                validations={{}}
+            />
+        </div>
     );
 }
 

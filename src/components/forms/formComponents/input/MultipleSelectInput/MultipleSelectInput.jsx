@@ -4,10 +4,11 @@ import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import { Autocomplete, TextField } from "@mui/material";
 import { errMsgRequired } from "../../../../../helpers/helpers";
 import { useEffect } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 function MultipleSelectInput({ id, label, options, index }) {
     const [optionList, setOptionList] = useState([]);
-
+    const [parent, enableAnimations] = useAutoAnimate();
     useEffect(() => {
         setOptionList([
             <SelectInputForm
@@ -23,7 +24,7 @@ function MultipleSelectInput({ id, label, options, index }) {
     }, []);
 
     return (
-        <div className="input-form analisis-form">
+        <div className="input-form analisis-form" ref={parent}>
             {optionList.map((option) => {
                 return option;
             })}
@@ -38,6 +39,10 @@ function SelectInputForm({ id, label, options, setOptionList, count, index }) {
         return options.map((option) => {
             return option?.nombre;
         });
+    }
+
+    function findOption(option) {
+        return options.find((opt) => opt.nombre === option);
     }
 
     function handleChange(option) {
@@ -56,7 +61,7 @@ function SelectInputForm({ id, label, options, setOptionList, count, index }) {
 
     useEffect(() => {
         if (selectedOption) {
-            if (options.find((opt) => opt.nombre === selectedOption)?.options) {
+            if (findOption(selectedOption)?.options) {
                 setOptionList((prev) => [
                     ...prev.slice(0, count + 1),
                     <SelectInputForm
@@ -72,6 +77,10 @@ function SelectInputForm({ id, label, options, setOptionList, count, index }) {
                         setOptionList={setOptionList}
                     />,
                 ]);
+            } else {
+                control.register(`precio-${index}`, {
+                    value: findOption(selectedOption)?.precio || 0,
+                });
             }
         }
     }, [selectedOption]);
