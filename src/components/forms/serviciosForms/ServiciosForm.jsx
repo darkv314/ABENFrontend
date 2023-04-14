@@ -18,7 +18,7 @@ import { useEffect } from "react";
 import MainAlert from "../../alerts/MainAlert";
 import useLogistica from "../../../hooks/useLogistica";
 import { TbCircleCheck } from "react-icons/tb";
-import SelectInputForm from "../formComponents/input/SelectInputForm";
+import MultipleSelectInput from "../formComponents/input/MultipleSelectInput/MultipleSelectInput";
 
 function ServiciosForm() {
     const navigate = useNavigate();
@@ -44,11 +44,15 @@ function ServiciosForm() {
             if (key.includes("-")) {
                 const newKey = {};
                 newKey[key] = data[key];
-                elements[parseInt(key.split("-")[1])] = {
-                    ...elements[parseInt(key.split("-")[1])],
-                    ...newKey,
-                };
-                elements[parseInt(key.split("-")[1])][key] = data[key];
+                if (newKey[key]) {
+                    const splited = key.split("-");
+                    elements[parseInt(splited[splited.length - 1])] = {
+                        ...elements[parseInt(splited[splited.length - 1])],
+                        ...newKey,
+                    };
+                    elements[parseInt(splited[splited.length - 1])][key] =
+                        data[key];
+                }
             } else {
                 formInfo[key] = data[key];
             }
@@ -211,11 +215,12 @@ function ItemForm({ position, id, setItem, setCourrier }) {
                 </div>
                 {servicios[id]?.preguntas?.map((pregunta, index) =>
                     pregunta?.type === "select" ? (
-                        <SelectInputForm
+                        <MultipleSelectInput
                             id={`${pregunta?.id}-${position}`}
                             label={pregunta?.label}
                             options={pregunta?.options}
-                            key={index}
+                            key={position}
+                            index={position}
                         />
                     ) : (
                         <InputForm

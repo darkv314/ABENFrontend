@@ -4,7 +4,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { Autocomplete, TextField } from "@mui/material";
 import { errMsgRequired } from "../../../../helpers/helpers";
 
-function SelectInputForm({ id, label, options, validations }) {
+function SelectInputForm({ id, label, options }) {
     function getOptions() {
         return options.map((option) => {
             return option?.nombre;

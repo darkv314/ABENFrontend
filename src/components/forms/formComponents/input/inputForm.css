@@ -85,6 +85,11 @@
     outline-color: var(--primary-brilliant);
 }
 
+.analisis-form {
+    display: grid;
+    gap: 1rem;
+}
+
 .error {
     color: var(--red-light);
     font-size: 0.75rem;

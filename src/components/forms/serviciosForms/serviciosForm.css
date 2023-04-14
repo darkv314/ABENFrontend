@@ -27,6 +27,7 @@
 
 .select-input input {
     outline: none !important;
+    font-family: "Raleway", sans-serif !important;
 }
 
 .select-input input:focus {

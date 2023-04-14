@@ -245,7 +245,7 @@ export const servicios = [
                                     { nombre: "Sulfatos", precio: 40 },
                                     { nombre: "Nitratos", precio: 40 },
                                     { nombre: "Cloruros", precio: 40 },
-                                    { nombre: "E- Coli", precio: 120 },
+                                    { nombre: "E-Coli", precio: 120 },
                                     {
                                         nombre: "Coliformes Totales",
                                         precio: 140,
