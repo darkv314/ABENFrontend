@@ -39,6 +39,7 @@ function ServiciosForm() {
         // console.log(data);
         let formInfo = {};
         const elements = [];
+        const analisis = [];
         Object.keys(data).forEach((key) => {
             // console.log(key);
             if (key.includes("-")) {
@@ -46,17 +47,38 @@ function ServiciosForm() {
                 newKey[key] = data[key];
                 if (newKey[key]) {
                     const splited = key.split("-");
-                    elements[parseInt(splited[splited.length - 1])] = {
-                        ...elements[parseInt(splited[splited.length - 1])],
-                        ...newKey,
-                    };
-                    elements[parseInt(splited[splited.length - 1])][key] =
-                        data[key];
+                    if (splited[0] === "tipoAnalisis") {
+                        analisis[splited[splited.length - 1]]
+                            ? (analisis[splited[splited.length - 1]] +=
+                                  data[key] + " ")
+                            : (analisis[splited[splited.length - 1]] =
+                                  data[key] + " ");
+                    } else {
+                        // console.log(newKey);
+                        // elements[parseInt(splited[splited.length - 1])] = {
+                        //     ...elements[parseInt(splited[splited.length - 1])],
+                        //     ...newKey,
+                        // };
+                        elements[parseInt(splited[splited.length - 1])]
+                            ? null
+                            : (elements[parseInt(splited[splited.length - 1])] =
+                                  {});
+                        elements[parseInt(splited[splited.length - 1])][
+                            splited[0]
+                        ] = data[key];
+                    }
                 }
             } else {
                 formInfo[key] = data[key];
             }
         });
+        analisis.forEach((analisis, index) => {
+            elements[index] = {
+                ...elements[index],
+                tipoAnalisis: analisis.slice(0, -1),
+            };
+        });
+
         const precio = elements.reduce((acc, cur, index) => {
             return acc + cur[`precio-${index}`];
         }, 0);
@@ -110,7 +132,7 @@ function ServiciosForm() {
             {courrier && (
                 <MainAlert
                     title="Servicio de Recojo y Entrega de dosímetros"
-                    description="Has registrado 6 dosimetros o más, ¿Deseas solicitar el servicio de Recojo y Entrega de dosimetros? El costo por dosimetro son de 5Bs"
+                    description="Has registrado 6 dosimetros o más, ¿Deseas solicitar el servicio de Recojo y Entrega de dosimetros? El costo por dosimetro es de 5Bs"
                     onClose={onClose}
                 >
                     {accepted ? (
@@ -226,10 +248,10 @@ function ItemForm({ position, id, setItem, setCourrier }) {
                                 key={position}
                                 index={position}
                             />
-                            {servicios[id]?.nombre ===
+                            {/* {servicios[id]?.nombre ===
                             "Análisis de muestras" ? (
-                                <AnalisisForm index={position} />
-                            ) : null}
+                                <h2>Información de la muestra</h2>
+                            ) : null} */}
                         </>
                     ) : (
                         <InputForm
@@ -389,7 +411,7 @@ function InformacionCourrier({
     const {
         register,
         handleSubmit,
-        trigger,
+        control,
         formState: { errors },
     } = useForm();
 
@@ -416,7 +438,7 @@ function InformacionCourrier({
     }
     return (
         <AnimatePresence mode={"wait"}>
-            <FormProvider {...{ register, errors }}>
+            <FormProvider {...{ register, errors, control }}>
                 <motion.form
                     variants={animation}
                     initial="hidden"
@@ -435,7 +457,7 @@ function InformacionCourrier({
                         }}
                         value={courrierInfo?.nombreReceptor}
                     />
-
+                    <PhoneInputForm value={courrierInfo?.phone} />
                     <InputForm
                         id="direccion"
                         label="Dirección"

@@ -15,6 +15,7 @@ import PasswordForm from "./components/forms/loginForms/passwordForm/PasswordFor
 import ServiciosForm from "./components/forms/serviciosForms/ServiciosForm";
 import Carrito from "./pages/cliente/carrito/Carrito";
 import InicioLab from "./pages/lab/inicio-lab/InicioLab";
+import ItemCarrito from "./pages/cliente/itemCarrito/ItemCarrito";
 // import Home from "./pages/Home/Home";
 const roles = ["admin", "user", "lab"];
 
@@ -43,6 +44,7 @@ function App() {
                 <Route element={<RequireAuth allowedRoles={["cliente"]} />}>
                     <Route path="inicio" element={<Inicio />} />
                     <Route path="carrito" element={<Carrito />} />
+                    <Route path="carrito/:id" element={<ItemCarrito />} />
                     {/* <Route path="/" element={<Inicio />} /> */}
                 </Route>
 

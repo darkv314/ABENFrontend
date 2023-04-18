@@ -4,6 +4,8 @@ import "./carrito.css";
 import { FaTrash } from "react-icons/fa";
 import ActionButton from "../../../components/buttons/actionButton/ActionButton";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router";
 
 function Carrito() {
     const { cart, setCart } = useCart();
@@ -46,6 +48,8 @@ function Carrito() {
 }
 
 function Item({ nombre, precio, cantidad, index, setCart }) {
+    const navigate = useNavigate();
+
     function removeItem() {
         setCart((items) => ({
             ...items,
@@ -53,8 +57,22 @@ function Item({ nombre, precio, cantidad, index, setCart }) {
             servicios: items.servicios.filter((item, i) => i !== index),
         }));
     }
+
+    function onClick(e) {
+        e.stopPropagation();
+        navigate(`/carrito/${index}`);
+    }
+
     return (
-        <div className="cart-item">
+        <motion.div
+            tabIndex={0}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.975 }}
+            className="cart-item"
+            onClick={(e) => {
+                onClick(e);
+            }}
+        >
             <h5>{nombre}</h5>
             <div className="cart-text">
                 <p>{cantidad}</p>
@@ -63,7 +81,7 @@ function Item({ nombre, precio, cantidad, index, setCart }) {
             <ActionButton type={"button"} handleClick={() => removeItem()}>
                 <FaTrash />
             </ActionButton>
-        </div>
+        </motion.div>
     );
 }
 

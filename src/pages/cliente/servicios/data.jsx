@@ -5,11 +5,17 @@ import analisis from "../../../assets/analisis.png";
 export const servicios = [
     {
         nombre: "Análisis de muestras",
-        descripcion:
+        descripcion: [
             "El Laboratorio de Radiometría de la ABEN se dedica principalmente a la medición, la vigilancia y la evaluación radiológica en residuos de chatarra ferrosa, para la detección de una posible presencia de material radiactivo.",
+            "La cantidad mínima para las muestras varia dependiendo del tipo de análisis:",
+            "items",
+        ],
+        items: [
+            "Análisis de suelos: 1Kg",
+            "Análisis de agua:  2L",
+            "Muestras orgánicas: 500ml o 500gr dependiendo si la muestra es líquida o sólida",
+        ],
         img: analisis,
-        warning:
-            "La cantidad mínima para las muestras varia dependiendo del tipo de análisis. En caso de ser análisis de suelos, el mínimo es de 1kg, en caso de ser análisis de agua, el mínimo es de 2 litros, finalmente, para las muestras orgánicas, el mínimo es de 500ml o 500gr dependiendo si la muestra es líquida o sólida.",
         precio: 100,
         preguntas: [
             {
@@ -440,6 +446,21 @@ export const servicios = [
                         ],
                     },
                 ],
+            },
+            {
+                label: "Procedencia de la muestra",
+                type: "text",
+                id: "procedencia",
+            },
+            {
+                label: "Identificación de la muestra",
+                type: "text",
+                id: "identificacion",
+            },
+            {
+                label: "Coordenadas georeferenciadas (opcional)",
+                type: "text",
+                id: "coordenadas",
             },
         ],
     },

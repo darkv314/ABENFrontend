@@ -65,7 +65,7 @@ function SelectInputForm({ id, label, options, setOptionList, count, index }) {
                 setOptionList((prev) => [
                     ...prev.slice(0, count + 1),
                     <SelectInputForm
-                        id={`${selectedOption}-${index}`}
+                        id={`tipoAnalisis-${selectedOption}-${index}`}
                         label={"Opciones"}
                         options={
                             options.find((opt) => opt.nombre === selectedOption)
