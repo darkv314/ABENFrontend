@@ -386,14 +386,24 @@ function InformacionPersonal({ setItem }) {
             <PhoneInputForm value={telefono} />
 
             {id === "2" ? (
-                <InputForm
-                    id="riesgo"
-                    label="Actividad asociada al riesgo de irradiación"
-                    type="text"
-                    validations={{
-                        required: errMsgRequired,
-                    }}
-                />
+                <>
+                    <InputForm
+                        id="riesgo"
+                        label="Actividad asociada al riesgo de irradiación"
+                        type="text"
+                        validations={{
+                            required: errMsgRequired,
+                        }}
+                    />
+                    <InputForm
+                        id="lecturas"
+                        label="Número de lecturas"
+                        type="number"
+                        validations={{
+                            required: errMsgRequired,
+                        }}
+                    />
+                </>
             ) : null}
             <ActionButton type={"button"} handleClick={handleSubmit(onSubmit)}>
                 Siguiente

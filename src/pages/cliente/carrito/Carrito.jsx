@@ -6,12 +6,102 @@ import ActionButton from "../../../components/buttons/actionButton/ActionButton"
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
+import { gql, useMutation } from "@apollo/client";
+import { servicios } from "../servicios/data";
+import useAuth from "../../../hooks/useAuth";
 
 function Carrito() {
     const { cart, setCart } = useCart();
+    const { auth } = useAuth();
     const [parent, enableAnimations] = useAutoAnimate();
     const nav = document.querySelector(".nav");
     const navHeight = nav?.getBoundingClientRect().height;
+    const CREAR_SERVICIOS = gql`
+        mutation crearServicios($input: [ServicioInput!]!) {
+            crearServicios(servicios: $input) {
+                id
+                nombre
+                empresa
+            }
+        }
+    `;
+    const [crearServicios, { data, loading, error }] = useMutation(
+        CREAR_SERVICIOS,
+        {
+            onCompleted: (data) => {
+                console.log(data);
+                setCart({ count: 0, servicios: [] });
+            },
+            context: {
+                headers: { authorization: `Bearer ${auth.access_token}` },
+            },
+        }
+    );
+
+    function handleSubmit() {
+        console.log(cart);
+        const serviciosSolicitados = cart.servicios.map((servicio) => {
+            let solicitud = {
+                nombre: servicio.nombre,
+                cantidad: servicio.cantidad,
+                empresa: servicio.info.nombre,
+                email: servicio.info.email,
+                nit: servicio.info.nit,
+                telefono: servicio.info.phone,
+                usuarioId: auth.id,
+            };
+            let items = [];
+            if (servicio.nombre === "Calibración") {
+                items = servicio.items.map((item) => {
+                    return {
+                        nombre: item.nombreEquipo,
+                        fabricante: item.fabricante,
+                        modelo: item.modelo,
+                        serie: item.serie,
+                    };
+                });
+                solicitud["calibracion"] = {
+                    equipos: items,
+                };
+            } else if (servicio.nombre === "Análisis de muestras") {
+                items = servicio.items.map((item) => {
+                    return {
+                        tipo: item.tipoAnalisis,
+                        procedencia: item.procedencia,
+                        identificacion: item.identificacion,
+                        coordenadas: item.coordenadas,
+                    };
+                });
+                solicitud["analisis"] = { muestras: items };
+            } else {
+                items = servicio.items.map((item) => {
+                    return {
+                        nombre: item.nombreTrabajador,
+                        ci: item.ci,
+                        expedido: item.expedido,
+                        cargo: item.cargo,
+                    };
+                });
+                solicitud["dosimetria"] = {
+                    empleados: items,
+                    lecturas: parseInt(servicio.info.lecturas),
+                    infoCourrier: {
+                        responsable: servicio.courrierInfo.nombreReceptor,
+                        telefono: servicio.courrierInfo.phone,
+                        direccion: servicio.courrierInfo.direccion,
+                    },
+                    actividad: servicio.info.riesgo,
+                };
+            }
+            return solicitud;
+        });
+        if (cart?.count === 0) {
+            console.log("No hay nada");
+        } else {
+            console.log(serviciosSolicitados);
+            crearServicios({ variables: { input: serviciosSolicitados } });
+        }
+    }
     return (
         <div
             className="cart-section"
@@ -34,10 +124,7 @@ function Carrito() {
                 )}
             </div>
             <div className="comprarButton">
-                <ActionButton
-                    type="button"
-                    handleClick={() => console.log(cart)}
-                >
+                <ActionButton type="button" handleClick={handleSubmit}>
                     Solicitar
                 </ActionButton>
             </div>
@@ -64,23 +151,26 @@ function Item({ nombre, precio, cantidad, index, setCart }) {
     }
 
     return (
-        <motion.div
-            tabIndex={0}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.975 }}
-            className="cart-item"
-            onClick={(e) => {
-                onClick(e);
-            }}
-        >
-            <h5>{nombre}</h5>
-            <div className="cart-text">
-                <p>{cantidad}</p>
-                <p>{precio} Bs.</p>
+        <motion.div whileHover={{ scale: 1.01 }} className="cart-item">
+            <div
+                className="cart-text-container"
+                tabIndex={0}
+                onClick={(e) => {
+                    onClick(e);
+                }}
+            >
+                <h5>{nombre}</h5>
+                <div className="cart-text">
+                    <p>{cantidad}</p>
+                    <p>{precio} Bs.</p>
+                </div>
             </div>
-            <ActionButton type={"button"} handleClick={() => removeItem()}>
-                <FaTrash />
-            </ActionButton>
+
+            <div className="button-container">
+                <ActionButton type={"button"} handleClick={() => removeItem()}>
+                    <FaTrash />
+                </ActionButton>
+            </div>
         </motion.div>
     );
 }

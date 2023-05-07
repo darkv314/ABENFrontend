@@ -33,6 +33,13 @@ td {
     color: black;
 }
 
+tr {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 1rem 0;
+    align-items: center;
+}
+
 th,
 td {
     padding: 1.5% 1%;
@@ -54,11 +61,11 @@ tr:nth-child(even) {
     background-color: var(--green);
 }
 
-.en-proceso {
+.no-aceptado {
     background-color: red;
 }
 
-.no-aceptado {
+.en-proceso {
     background-color: #fbced3;
     color: #e72835;
 }

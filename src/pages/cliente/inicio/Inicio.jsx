@@ -17,8 +17,6 @@ function Inicio() {
                     nombre
                 },
                 cantidad,
-                envio,
-                recojo,
                 fin,
                 documentos{
                     nombre,

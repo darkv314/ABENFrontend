@@ -13,8 +13,8 @@ function CardService({ title, img, id }) {
         <motion.div
             tabIndex={0}
             onClick={handleClick}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.975 }}
+            whileHover={{ scale: 1.035 }}
+            // whileTap={{ scale: 0.975 }}
             className="card-service"
             style={{
                 backgroundImage: `url(${img})`,

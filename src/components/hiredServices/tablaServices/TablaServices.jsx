@@ -23,15 +23,15 @@ function TablaServices({ data }) {
                                     <p
                                         className={
                                             key === "estado"
-                                                ? className(servicio[key])
+                                                ? className(
+                                                      servicio[key]?.nombre
+                                                  )
                                                 : key
                                         }
                                     >
-                                        {servicio[key]
-                                            ? servicio[key]
-                                            : key === "estado"
-                                            ? "Contrato generado"
-                                            : "-"}
+                                        {key === "estado"
+                                            ? servicio[key]?.nombre
+                                            : servicio[key]}
                                     </p>
                                 </td>
                             );
@@ -60,8 +60,6 @@ const servicios = [
     "Servicio contratado",
     "Estado",
     "Cantidad",
-    "Fecha de envio/recojo",
-    "Fecha de entrega",
     "Fecha de finalización",
     "Documentación",
 ];
